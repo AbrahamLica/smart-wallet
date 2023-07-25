@@ -1,15 +1,14 @@
 import { useReducer } from "react";
 import { ActionType, DataType } from "./types";
 
-export const reducerInitialState: DataType[] = [
-
-];
+export const reducerInitialState: DataType[] = [];
 
 export function reducer(state: DataType[], action: ActionType) {
   switch (action.type) {
     case "CADASTRAR_DESPESA":
       let newState = [...state];
       newState.push({
+        ...state,
         data: action.payload?.data,
         categoria: action.payload?.categoria,
         titulo: action.payload?.titulo,
@@ -30,8 +29,6 @@ export function reducer(state: DataType[], action: ActionType) {
       });
       return newStatee;
       break;
-
-
   }
 
   return state;

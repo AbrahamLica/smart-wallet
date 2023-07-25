@@ -2,6 +2,7 @@ import * as C from "./AppStyles";
 import "./styles.css";
 import { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { reducerInitialState, reducer } from "./Reducer";
+import Header from "./Components/Header/Header";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, reducerInitialState);
@@ -10,8 +11,8 @@ function App() {
   const [titulo, setTitulo] = useState("");
   const [valor, setValor] = useState<any>();
   const [balanco, setBalanco] = useState<number>();
-  const [despesa, setDespesa] = useState<number>();
-  const [receita, setReceita] = useState<number>();
+  const [despesa, setDespesa] = useState<any>();
+  const [receita, setReceita] = useState<any>();
 
   const formatter = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -26,23 +27,23 @@ function App() {
   useEffect(() => {
     for (let i = 0; i < state.length; i++) {
       if (state[i].despesa) {
-        calcDespesa += state[i].despesa
+        calcDespesa += state[i].despesa!;
       }
     }
 
     for (let i = 0; i < state.length; i++) {
       if (state[i].receita) {
-        calcReceita += state[i].receita
-      } 
+        calcReceita += state[i].receita!;
+      }
     }
 
-    var resultadoReceita:any = calcReceita - calcDespesa
-    var newresultadoReceita:any = resultadoReceita.toFixed(2)
+    var resultadoReceita: any = calcReceita - calcDespesa;
+    var newresultadoReceita: any = resultadoReceita.toFixed(2);
 
     setDespesa(calcDespesa.toFixed(2));
     setReceita(calcReceita.toFixed(2));
     setBalanco(newresultadoReceita);
-  }, [valor, balanco, despesa, receita, state]);
+  }, [valor, balanco, despesa, receita, state.length]);
 
   const list = [
     { id: 1, name: "Despesa" },
@@ -99,17 +100,9 @@ function App() {
     }
   }
 
-  function teste() {
-    console.log(state);
-  }
-
   return (
     <C.GlobalContainer>
-      <C.Header>
-        <C.Text bold fontSize="40px" color="white">
-          Sistema Financeiro
-        </C.Text>
-      </C.Header>
+      <Header></Header>
 
       <C.MainContainer>
         <C.Container
@@ -203,7 +196,7 @@ function App() {
           </C.Container>
 
           <C.Button onClick={Add}>Adicionar</C.Button>
-          <C.Button onClick={teste}>teste</C.Button>
+
         </C.Container>
 
         <C.Container
@@ -212,16 +205,15 @@ function App() {
           border="1px solid black"
           borderRadius="10px"
         >
-          {state.map((item, index) => (
-            <table>
+          <table>
+            <tr>
+              <th>Data</th>
+              <th>Categoria</th>
+              <th>Título</th>
+              <th>Valor</th>
+            </tr>
+            {state.map((item, index) => (
               <tbody>
-                <tr>
-                  <th>Data</th>
-                  <th>Categoria</th>
-                  <th>Título</th>
-                  <th>Valor</th>
-                </tr>
-
                 <tr>
                   <td>{item.data}</td>
                   <td>{item.categoria}</td>
@@ -229,8 +221,8 @@ function App() {
                   <td>{item.valor}</td>
                 </tr>
               </tbody>
-            </table>
-          ))}
+            ))}
+          </table>
         </C.Container>
       </C.MainContainer>
     </C.GlobalContainer>
