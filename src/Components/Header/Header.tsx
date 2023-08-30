@@ -1,5 +1,5 @@
 import React from 'react'
-import * as C from '../../AppStyles'
+import * as C from '../Home/HomeStyles'
 
 const Header = () => {
   return (
