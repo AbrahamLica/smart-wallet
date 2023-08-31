@@ -46,7 +46,6 @@ export type TextProps = {
   zIndex?: boolean;
 };
 
-/////////////////// GERAL ///////////////////////
 
 export const Container = styled.div<ContainerProps>`
   color: ${(props) => props.color};
@@ -71,34 +70,65 @@ export const Container = styled.div<ContainerProps>`
   overflow: hidden;
 `;
 
-export const GlobalContainer = styled.div<ContainerProps>`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Header = styled.div<ContainerProps>`
-  height: 15vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: blue;
-`;
-
 export const MainContainer = styled.div<ContainerProps>`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const FormContainer = styled.div<ContainerProps>`
   width: 80%;
+  min-height: 80vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
+  box-shadow: 5px 5px 10px black;
   border-radius: 10px;
   margin-top: 20px;
+  background-color: white;
 `;
+
+export const ContainerCategory = styled.div<ContainerProps>`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+`;
+
+export const ContainerInformations = styled.div<ContainerProps>`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 15px 0px;
+`;
+
+export const ContainerSingleInformation = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TitleInformation = styled.p<TextProps>`
+  font-size: 1.4rem;
+  color: black;
+  font-weight: bold;
+`;
+
+export const Information = styled.p<TextProps>`
+  font-size: 1.2rem;
+  color: black;
+  font-weight: bold;
+`;
+
+
+
+
+
 
 export const Text = styled.p<TextProps>`
   color: ${(props) => props.color};
@@ -135,10 +165,13 @@ export const Option = styled.option<TextProps>`
   height: 30px;
 `;
 
-export const Button = styled.button<TextProps>`
-  font-size: 15px;
-  height: 30px;
-  padding: 0px 20px 0px 20px;
+export const ButtonAdd = styled.button<TextProps>`
+  font-size: 1rem;
+  padding: 7px 12px;
+  background-color: black;
+  border: none;
+  color: white;
+  border-radius: 10px;
 `;
 
 export const Table = styled.table<ContainerProps>`

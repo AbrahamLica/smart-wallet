@@ -1,9 +1,11 @@
 import * as C from "./HomeStyles";
 import "./styles.css";
-import { ChangeEvent, useEffect, useReducer, useState } from "react";
+import { ChangeEvent, useEffect, useState, useContext } from "react";
+import { Context } from "../../Context/Context";
 import Header from "../Header/Header";
 
 function App() {
+  const { state, dispatch } = useContext(Context);
   const [data, setData] = useState<any>(0);
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
@@ -23,15 +25,15 @@ function App() {
   var despesaFormatada: number = 1;
 
   useEffect(() => {
-    for (let i = 0; i < state.length; i++) {
-      if (state[i].despesa) {
-        calcDespesa += state[i].despesa!;
+    for (let i = 0; i < state.data.length; i++) {
+      if (state.data[i].despesa) {
+        calcDespesa += state.data[i].despesa!;
       }
     }
 
-    for (let i = 0; i < state.length; i++) {
-      if (state[i].receita) {
-        calcReceita += state[i].receita!;
+    for (let i = 0; i < state.data.length; i++) {
+      if (state.data[i].receita) {
+        calcReceita += state.data[i].receita!;
       }
     }
 
@@ -41,7 +43,7 @@ function App() {
     setDespesa(calcDespesa.toFixed(2));
     setReceita(calcReceita.toFixed(2));
     setBalanco(newresultadoReceita);
-  }, [valor, balanco, despesa, receita, state.length]);
+  }, [valor, balanco, despesa, receita, state.data.length]);
 
   const list = [
     { id: 1, name: "Despesa" },
@@ -99,103 +101,66 @@ function App() {
   }
 
   return (
-    <C.GlobalContainer>
+    <C.MainContainer>
       <Header></Header>
 
-      <C.MainContainer>
-        <C.Container
-          displayFlex
-          justifyContent="space-between"
-          width="100%"
-          padding="20px"
-          border="1px solid black"
-          borderRadius="10px"
-        >
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Receita
-            </C.Text>
-            <C.Text bold fontSize="18px" color="black">
-              R$ {receita}
-            </C.Text>
-          </C.Container>
+      <C.FormContainer>
+        <C.ContainerCategory>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Receita</C.TitleInformation>
+            <C.Information>R$ {receita}</C.Information>
+          </C.ContainerSingleInformation>
 
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Despesa
-            </C.Text>
-            <C.Text bold fontSize="18px" color="black">
-              R$ {despesa}
-            </C.Text>
-          </C.Container>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Despesa</C.TitleInformation>
+            <C.Information>R$ {despesa}</C.Information>
+          </C.ContainerSingleInformation>
 
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Balanço
-            </C.Text>
-            <C.Text bold fontSize="18px" color="black">
-              R$ {balanco}
-            </C.Text>
-          </C.Container>
-        </C.Container>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Balanço</C.TitleInformation>
+            <C.Information>R$ {balanco}</C.Information>
+          </C.ContainerSingleInformation>
+        </C.ContainerCategory>
 
-        <C.Container
-          displayFlex
-          justifyContent="space-between"
-          alignItems="flex-end"
-          width="100%"
-          padding="20px"
-          border="1px solid black"
-          borderRadius="10px"
-          margin="15px 0px"
-        >
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Data
-            </C.Text>
+        <C.ContainerInformations>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Data</C.TitleInformation>
             <C.Input
               type="date"
               onChange={changeValueData}
               value={data}
             ></C.Input>
-          </C.Container>
+          </C.ContainerSingleInformation>
 
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Categoria
-            </C.Text>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Categoria</C.TitleInformation>
             <C.Select value={categoria} onChange={changeValueCategoria}>
               {list.map((item, index) => (
                 <C.Option value={item.name}>{item.name}</C.Option>
               ))}
             </C.Select>
-          </C.Container>
+          </C.ContainerSingleInformation>
 
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Título
-            </C.Text>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Título</C.TitleInformation>
             <C.Input
               type="text"
               onChange={changeValueTitulo}
               value={titulo}
             ></C.Input>
-          </C.Container>
+          </C.ContainerSingleInformation>
 
-          <C.Container displayFlex column>
-            <C.Text bold fontSize="23px" color="black">
-              Valor
-            </C.Text>
+          <C.ContainerSingleInformation>
+            <C.TitleInformation>Valor</C.TitleInformation>
             <C.Input
               type="number"
               onChange={changeValueValor}
               value={valor}
             ></C.Input>
-          </C.Container>
+          </C.ContainerSingleInformation>
 
-          <C.Button onClick={Add}>Adicionar</C.Button>
-
-        </C.Container>
+          <C.ButtonAdd onClick={Add}>Adicionar</C.ButtonAdd>
+        </C.ContainerInformations>
 
         <C.Container
           width="100%"
@@ -210,7 +175,7 @@ function App() {
               <th>Título</th>
               <th>Valor</th>
             </tr>
-            {state.map((item, index) => (
+            {state.data.map((item, index) => (
               <tbody>
                 <tr>
                   <td>{item.data}</td>
@@ -222,8 +187,8 @@ function App() {
             ))}
           </table>
         </C.Container>
-      </C.MainContainer>
-    </C.GlobalContainer>
+      </C.FormContainer>
+    </C.MainContainer>
   );
 }
 

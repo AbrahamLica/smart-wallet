@@ -1,16 +1,16 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Login from './Components/Login/Login'
-// import { GlobalStyle } from "./AppGlobalStyles";
+import { GlobalStyle } from "./AppGlobalStyle";
 
 function App() {
   return (
     <>
-      {/* <GlobalStyle /> */}
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/Home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>
