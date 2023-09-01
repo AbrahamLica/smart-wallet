@@ -115,10 +115,12 @@ export const ContainerModal = styled.div<ContainerProps>`
   flex-direction: column;
   padding: 20px;
   background-color: white;
-  min-width: 35vw;
-  /* min-height: 50vh; */
+  min-width: 30vw;
   z-index: 10;
   border-radius: 20px;
+
+  box-shadow: 2px 2px #323232;
+  border: 2px solid #323232;
 `;
 
 export const ContainerLabelInput = styled.div<ContainerProps>`
@@ -137,12 +139,65 @@ export const Label = styled.label<ContainerProps>`
 
 export const InputText = styled.input<ContainerProps>`
   padding: 6px;
+  box-shadow: 2px 2px #323232;
+  border: 2px solid #323232;
+  border-radius: 5px;
+
+  :focus {
+    outline: none;
+  }
 `;
 
 export const InputNumber = styled.input<ContainerProps>`
   padding: 6px;
+  box-shadow: 2px 2px #323232;
+  border: 2px solid #323232;
+  border-radius: 5px;
+
+  :focus {
+    outline: none;
+  }
 `;
 
 export const InputRadio = styled.input<ContainerProps>`
   margin: ${(props) => props.margin};
+`;
+
+export const ButtonSend = styled.button<ContainerProps>`
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  cursor: pointer;
+  margin-top: 10px;
+
+  ::before {
+    content: "";
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+    transition: 0.5s ease;
+    display: block;
+    z-index: -1;
+  }
+
+  :hover::before {
+    width: 9em;
+  }
+`;
+
+export const ImgUser = styled.img<ContainerProps>`
+  width: 70px;
+  cursor: pointer;
+  padding: 2px;
 `;
