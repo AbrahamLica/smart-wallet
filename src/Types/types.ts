@@ -12,6 +12,7 @@ export type UserType = {
   age: number;
   profession: string;
   sex: string;
+  img: string;
 };
 
 export type ActionType = {
@@ -34,5 +35,3 @@ export type InitialStateContextType = {
   data: DataType[];
   user: UserType;
 };
-
-

@@ -108,7 +108,7 @@ export const MainContainerModal = styled.div<ContainerProps>`
   transition: all ease 0.5s;
 `;
 
-export const ContainerModal = styled.div<ContainerProps>`
+export const ContainerModal = styled.form<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +118,6 @@ export const ContainerModal = styled.div<ContainerProps>`
   min-width: 30vw;
   z-index: 10;
   border-radius: 20px;
-
   box-shadow: 2px 2px #323232;
   border: 2px solid #323232;
 `;
@@ -200,4 +199,9 @@ export const ImgUser = styled.img<ContainerProps>`
   width: 70px;
   cursor: pointer;
   padding: 2px;
+`;
+
+export const Span = styled.span<ContainerProps>`
+  font-size: 0.8rem;
+  margin-top: 3px;
 `;

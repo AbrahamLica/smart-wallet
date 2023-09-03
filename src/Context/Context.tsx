@@ -48,6 +48,7 @@ export const reducerUserInitialState: UserType = {
   age: 0,
   profession: "",
   sex: "",
+  img: "",
 };
 
 export function reducerUser(state: UserType, action: ActionType) {
@@ -59,6 +60,7 @@ export function reducerUser(state: UserType, action: ActionType) {
         age: action.payload?.age,
         profession: action.payload?.profession,
         sex: action.payload?.sex,
+        img: action.payload?.img,
       };
       break;
   }

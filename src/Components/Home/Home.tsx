@@ -9,10 +9,10 @@ function App() {
   const [data, setData] = useState<any>(0);
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
-  const [valor, setValor] = useState<any>();
-  const [balanco, setBalanco] = useState<number>();
-  const [despesa, setDespesa] = useState<any>();
-  const [receita, setReceita] = useState<any>();
+  const [valor, setValor] = useState<any>("");
+  const [balanco, setBalanco] = useState<number>(0);
+  const [despesa, setDespesa] = useState<number>(0);
+  const [receita, setReceita] = useState<number>(0);
 
   const formatter = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -129,14 +129,22 @@ function App() {
               type="date"
               onChange={changeValueData}
               value={data}
+              name="date"
+              autoComplete="on"
             ></C.Input>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
             <C.TitleInformation>Categoria</C.TitleInformation>
-            <C.Select value={categoria} onChange={changeValueCategoria}>
+            <C.Select
+              value={categoria}
+              onChange={changeValueCategoria}
+              name="category"
+            >
               {list.map((item, index) => (
-                <C.Option value={item.name}>{item.name}</C.Option>
+                <C.Option value={item.name} key={index}>
+                  {item.name}
+                </C.Option>
               ))}
             </C.Select>
           </C.ContainerSingleInformation>
@@ -147,6 +155,8 @@ function App() {
               type="text"
               onChange={changeValueTitulo}
               value={titulo}
+              name="title"
+              autoComplete="on"
             ></C.Input>
           </C.ContainerSingleInformation>
 
@@ -156,10 +166,14 @@ function App() {
               type="number"
               onChange={changeValueValor}
               value={valor}
+              name="value"
+              autoComplete="on"
             ></C.Input>
           </C.ContainerSingleInformation>
 
-          <C.ButtonAdd onClick={Add}>Adicionar</C.ButtonAdd>
+          <C.ButtonAdd onClick={Add} type="button">
+            Adicionar
+          </C.ButtonAdd>
         </C.ContainerInformations>
 
         <C.Container
@@ -169,14 +183,16 @@ function App() {
           borderRadius="10px"
         >
           <table>
-            <tr>
-              <th>Data</th>
-              <th>Categoria</th>
-              <th>Título</th>
-              <th>Valor</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Título</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
             {state.data.map((item, index) => (
-              <tbody>
+              <tbody key={index}>
                 <tr>
                   <td>{item.data}</td>
                   <td>{item.categoria}</td>

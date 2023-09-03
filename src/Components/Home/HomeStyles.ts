@@ -172,6 +172,7 @@ export const ButtonAdd = styled.button<TextProps>`
   border: none;
   color: white;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export const Table = styled.table<ContainerProps>`

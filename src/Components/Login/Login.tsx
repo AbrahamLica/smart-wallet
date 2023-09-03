@@ -12,6 +12,7 @@ import user3 from "../../img/user3.png";
 import user4 from "../../img/user4.png";
 import user5 from "../../img/user5.png";
 import user6 from "../../img/user6.png";
+import { useNavigate } from "react-router-dom";
 import * as C from "./LoginStyles";
 
 const Login = () => {
@@ -27,6 +28,14 @@ const Login = () => {
   const [imgUser4, setImgUser4] = useState(false);
   const [imgUser5, setImgUser5] = useState(false);
   const [imgUser6, setImgUser6] = useState(false);
+  const [spanName, setSpanName] = useState("");
+  const [spanProfession, setSpanProfession] = useState("");
+  const navigate = useNavigate();
+  var nameValid = false;
+  var ageValid = false;
+  var professionValid = false;
+  var sexValid = false;
+  var imgValid = false;
 
   useEffect(() => {}, [
     imgUser1,
@@ -38,8 +47,6 @@ const Login = () => {
   ]);
 
   function choseImgUser(e: any) {
-    console.log(e.target);
-
     if (e.target.alt == "user1") {
       setImgUserSelected(e.target.src);
       setImgUser1(true);
@@ -89,8 +96,6 @@ const Login = () => {
       setImgUser5(false);
       setImgUser6(true);
     }
-
-    console.log(imgUserSelected);
   }
 
   function changeSetName(e: ChangeEvent<HTMLInputElement>) {
@@ -109,38 +114,120 @@ const Login = () => {
     setSex(e.target.value);
   }
 
-  function logIn() {
-    dispatch({
-      type: "LOG_IN",
-      payload: {
-        name: name,
-        age: age,
-        profession: profession,
-        sex: sex,
-        img: imgUserSelected
-      },
-    });
+  function validateInputName() {
+    if (!name) {
+      setSpanName('o campo "Nome" não pode estar vazio!');
+      nameValid = false;
+    } else if (name.length >= 1 && name.length < 3) {
+      setSpanName("O campo 'Nome' não pode ter menos de 3 caracteres!");
+      nameValid = false;
+    } else if (containsSpecialChars(name) == true) {
+      setSpanName("O campo 'Nome' não pode ter caracteres especiais!");
+      nameValid = false;
+    } else {
+      setSpanName("");
+      nameValid = true;
+    }
+  }
 
-    console.log(state.user);
+  function validateInputProfession() {
+    if (!profession) {
+      setSpanProfession('o campo "Profissão" não pode estar vazio!');
+      professionValid = false;
+    } else if (profession.length >= 1 && profession.length < 2) {
+      setSpanProfession(
+        "O campo 'Profissão' não pode ter menos de 3 caracteres!"
+      );
+      professionValid = false;
+    } else if (containsSpecialChars(profession) == true) {
+      setSpanProfession(
+        "O campo 'Profissão' não pode ter caracteres especiais!"
+      );
+      professionValid = false;
+    } else if (containsNumbers(profession) == true) {
+      setSpanProfession("O campo 'Profissão' não pode ter números!");
+      professionValid = false;
+    } else {
+      setSpanProfession("");
+      professionValid = true;
+    }
+  }
+
+  function containsSpecialChars(str: string) {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(str);
+  }
+
+  function containsNumbers(str: string) {
+    const specialChars = /[0-9]/g;
+    return specialChars.test(str);
+  }
+
+  function logIn() {
+    if (age && age > 10 && age < 99) {
+      ageValid = true;
+    }
+
+    if (sex) {
+      sexValid = true;
+    }
+
+    if (imgUserSelected) {
+      imgValid = true;
+    }
+
+    validateInputName();
+    validateInputProfession();
+
+    if (nameValid && ageValid && professionValid && sexValid && imgValid) {
+      dispatch({
+        type: "LOG_IN",
+        payload: {
+          name: name,
+          age: age,
+          profession: profession,
+          sex: sex,
+          img: imgUserSelected,
+        },
+      });
+      navigate("/Home");
+    } else if (!nameValid) {
+      alert("Verifique o campo 'Nome'.");
+    } else if (!ageValid) {
+      alert("Verifique o campo 'Idade'.");
+    } else if (!professionValid) {
+      alert("Verifique o campo 'Profissão'.");
+    } else if (!sexValid) {
+      alert("Verifique se o seu Gênero está marcado.");
+    } else if (!imgValid) {
+      alert("Por favor, Escolha um avatar.");
+    }
   }
 
   return (
     <C.MainContainerModal>
       <C.ContainerModal>
+        <C.Text fontSize="1.6rem">Login</C.Text>
         <C.ContainerLabelInput>
           <C.InputText
             type="text"
             placeholder="Nome"
             onChange={changeSetName}
+            onBlur={validateInputName}
+            name="name"
           ></C.InputText>
+          <C.Span>{spanName}</C.Span>
         </C.ContainerLabelInput>
 
         <C.ContainerLabelInput>
           <C.InputNumber
             type="number"
             placeholder="Idade"
+            min={10}
             onChange={changeSetAge}
+            name="number"
           ></C.InputNumber>
+          <C.Span></C.Span>
         </C.ContainerLabelInput>
 
         <C.ContainerLabelInput>
@@ -148,7 +235,10 @@ const Login = () => {
             type="text"
             placeholder="Profissão"
             onChange={changeSetProfession}
+            onBlur={validateInputProfession}
+            name="profession"
           ></C.InputText>
+          <C.Span>{spanProfession}</C.Span>
         </C.ContainerLabelInput>
 
         <C.Container
@@ -169,7 +259,7 @@ const Login = () => {
               id="masculino"
               value="male"
               onChange={setGender}
-              checked={sex == 'male'}
+              checked={sex == "male"}
             ></C.InputRadio>
             <C.Label htmlFor="feminino" margin="0 10px 0 10px">
               Feminino
@@ -180,7 +270,7 @@ const Login = () => {
               id="feminino"
               value="female"
               onChange={setGender}
-              checked={sex == 'female'}
+              checked={sex == "female"}
             ></C.InputRadio>
           </C.Container>
         </C.Container>
@@ -239,7 +329,9 @@ const Login = () => {
           </C.Container>
         </C.Container>
 
-        <C.ButtonSend onClick={logIn}>Entrar</C.ButtonSend>
+        <C.ButtonSend onClick={logIn} type="button">
+          Entrar
+        </C.ButtonSend>
       </C.ContainerModal>
     </C.MainContainerModal>
   );
