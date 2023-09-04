@@ -120,16 +120,22 @@ export const ContainerModal = styled.form<ContainerProps>`
   border-radius: 20px;
   box-shadow: 2px 2px #323232;
   border: 2px solid #323232;
+
+  @media (max-width: 425px) {
+    width: 90%;
+  }
 `;
 
 export const ContainerLabelInput = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 10px 0px;
-  /* background-color: red; */
   padding: 10px;
   width: 90%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const Label = styled.label<ContainerProps>`
@@ -201,7 +207,10 @@ export const ImgUser = styled.img<ContainerProps>`
   padding: 2px;
 `;
 
-export const Span = styled.span<ContainerProps>`
-  font-size: 0.8rem;
-  margin-top: 3px;
+export const Span = styled.div<ContainerProps>`
+  word-break: break-all;
+
+  p {
+    margin-top: 3px;
+  }
 `;

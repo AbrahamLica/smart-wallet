@@ -216,7 +216,9 @@ const Login = () => {
             onBlur={validateInputName}
             name="name"
           ></C.InputText>
-          <C.Span>{spanName}</C.Span>
+          <C.Span>
+            <C.Text fontSize="0.8rem">{spanName}</C.Text>
+          </C.Span>
         </C.ContainerLabelInput>
 
         <C.ContainerLabelInput>
@@ -227,7 +229,6 @@ const Login = () => {
             onChange={changeSetAge}
             name="number"
           ></C.InputNumber>
-          <C.Span></C.Span>
         </C.ContainerLabelInput>
 
         <C.ContainerLabelInput>
@@ -238,7 +239,9 @@ const Login = () => {
             onBlur={validateInputProfession}
             name="profession"
           ></C.InputText>
-          <C.Span>{spanProfession}</C.Span>
+          <C.Span>
+            <C.Text fontSize="0.8rem">{spanProfession}</C.Text>
+          </C.Span>
         </C.ContainerLabelInput>
 
         <C.Container

@@ -1,5 +1,4 @@
 import * as C from "./HomeStyles";
-import "./styles.css";
 import { ChangeEvent, useEffect, useState, useContext } from "react";
 import { Context } from "../../Context/Context";
 import Header from "../Header/Header";
@@ -40,8 +39,8 @@ function App() {
     var resultadoReceita: any = calcReceita - calcDespesa;
     var newresultadoReceita: any = resultadoReceita.toFixed(2);
 
-    setDespesa(calcDespesa.toFixed(2));
-    setReceita(calcReceita.toFixed(2));
+    setDespesa(calcDespesa);
+    setReceita(calcReceita);
     setBalanco(newresultadoReceita);
   }, [valor, balanco, despesa, receita, state.data.length]);
 
@@ -68,6 +67,13 @@ function App() {
   }
 
   function Add() {
+
+    let dateFull = data;
+    let day = dateFull.slice(7, 9);
+    let month = dateFull.slice(5, 6);
+    let year = dateFull.slice(0, 3);
+    let dateFullFixed = `${day}-${month}-${year}`;
+
     if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
       alert("Por favor, preencha todos os dados antes de adicionar!");
     } else {
@@ -75,7 +81,7 @@ function App() {
         dispatch({
           type: "CADASTRAR_DESPESA",
           payload: {
-            data: data,
+            data: dateFullFixed,
             categoria: categoria,
             titulo: titulo,
             valor: valor,
@@ -86,7 +92,7 @@ function App() {
         dispatch({
           type: "CADASTRAR_RECEITA",
           payload: {
-            data: data,
+            data: dateFullFixed,
             categoria: categoria,
             titulo: titulo,
             valor: valor,
@@ -108,12 +114,12 @@ function App() {
         <C.ContainerCategory>
           <C.ContainerSingleInformation>
             <C.TitleInformation>Receita</C.TitleInformation>
-            <C.Information>R$ {receita}</C.Information>
+            <C.Information>R$ {receita.toFixed(2)}</C.Information>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
             <C.TitleInformation>Despesa</C.TitleInformation>
-            <C.Information>R$ {despesa}</C.Information>
+            <C.Information>R$ {despesa.toFixed(2)}</C.Information>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
@@ -185,19 +191,19 @@ function App() {
           <table>
             <thead>
               <tr>
-                <th>Data</th>
-                <th>Categoria</th>
-                <th>Título</th>
-                <th>Valor</th>
+                <C.Th>Data</C.Th>
+                <C.Th>Categoria</C.Th>
+                <C.Th>Título</C.Th>
+                <C.Th>Valor</C.Th>
               </tr>
             </thead>
             {state.data.map((item, index) => (
               <tbody key={index}>
                 <tr>
-                  <td>{item.data}</td>
-                  <td>{item.categoria}</td>
-                  <td>{item.titulo}</td>
-                  <td>{item.valor}</td>
+                  <C.Td>{item.data}</C.Td>
+                  <C.Td>{item.categoria}</C.Td>
+                  <C.Td>{item.titulo}</C.Td>
+                  <C.Td>{item.valor}</C.Td>
                 </tr>
               </tbody>
             ))}

@@ -46,7 +46,6 @@ export type TextProps = {
   zIndex?: boolean;
 };
 
-
 export const Container = styled.div<ContainerProps>`
   color: ${(props) => props.color};
   width: ${(props) => props.width};
@@ -77,10 +76,11 @@ export const MainContainer = styled.div<ContainerProps>`
 `;
 
 export const FormContainer = styled.div<ContainerProps>`
-  width: 80%;
+  min-width: 80%;
   min-height: 80vh;
   padding: 20px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   box-shadow: 5px 5px 10px black;
   border-radius: 10px;
@@ -91,10 +91,12 @@ export const FormContainer = styled.div<ContainerProps>`
 export const ContainerCategory = styled.div<ContainerProps>`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 20px;
+  min-height: 100px;
   border: 1px solid black;
   border-radius: 10px;
+  padding: 10px;
 `;
 
 export const ContainerInformations = styled.div<ContainerProps>`
@@ -102,7 +104,8 @@ export const ContainerInformations = styled.div<ContainerProps>`
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  padding: 20px;
+  min-height: 100px;
+  padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
   margin: 15px 0px;
@@ -124,11 +127,6 @@ export const Information = styled.p<TextProps>`
   color: black;
   font-weight: bold;
 `;
-
-
-
-
-
 
 export const Text = styled.p<TextProps>`
   color: ${(props) => props.color};
@@ -154,11 +152,10 @@ export const Link = styled.a<TextProps>`
 
 export const Input = styled.input<InputProps>`
   height: 30px;
-  padding: 10px;
 `;
 
 export const Select = styled.select<TextProps>`
-  height: 30px;
+  height: 35px;
 `;
 
 export const Option = styled.option<TextProps>`
@@ -190,4 +187,15 @@ export const Table = styled.table<ContainerProps>`
   border: ${(props) => props.border};
   border-radius: ${(props) => props.borderRadius};
   border-collapse: collapse;
+`;
+
+export const Th = styled.th<ContainerProps>`
+  text-align: left;
+  width: 35%;
+  padding: 10px;
+`;
+
+export const Td = styled.th<ContainerProps>`
+  text-align: left;
+  padding: 10px;
 `;
