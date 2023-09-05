@@ -74,35 +74,101 @@ export const Text = styled.p<TextProps>`
 export const ContainerHeader = styled.div<ContainerProps>`
   width: 100%;
   background-color: #18206f;
-  padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "A1 A2 A2 A3";
   min-height: 15vh;
-`;
 
-export const ContainerInformationsUser= styled.div<ContainerProps>`
-    justify-self: start;
-    display: flex;
-    align-items: center;
-`;
-
-export const ContainerLogoTitle= styled.div<ContainerProps>`
-    display: flex;
-    align-items: center;
+  @media (max-width: 780px) {
+    grid-template-areas: "A2";
     justify-content: center;
+  }
 `;
 
-export const ContainerNav = styled.nav<ContainerProps>`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;    
-    justify-self: end;
+export const ContainerInformationsUser = styled.div<ContainerProps>`
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  grid-area: A1;
 
-    img {
-      margin-left: 10px;
-      margin-right: 10px;
-      cursor: pointer;
+  p {
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 780px) {
+    display: none;
+  }
+`;
+
+export const ContainerLogoTitle = styled.div<ContainerProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  grid-area: A2;
+  /* background-color: red; */
+
+  @media (max-width: 780px) {
+      flex-direction: column;
+    }
+`;
+
+export const imgWallet = styled.img<ContainerProps>`
+  width: 50px;
+
+  @media (max-width: 780px) {
+      width: 35px;
+    }
+`;
+
+export const imgMenuHamburguer = styled.img<ContainerProps>`
+  display: none;
+  width: 25px;
+  cursor: pointer;
+
+  @media (max-width: 780px) {
+      display: block;
     }
 `;
 
 
+
+export const ContainerNav = styled.nav<ContainerProps>`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  justify-self: end;
+  width: 100%;
+  grid-area: A3;
+
+  img {
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 780px) {
+    display: none;
+  }
+`;
+
+export const Title = styled.h1<ContainerProps>`
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-right: 10px;
+  color: white;
+
+  @media (max-width: 990px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 780px) {
+    font-size: 1.4rem;
+  }
+`;

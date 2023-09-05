@@ -4,6 +4,8 @@ import { Context } from "../../Context/Context";
 import { useContext, useState } from "react";
 import github from "../../img/github.png";
 import linkedin from "../../img/linkedin2.png";
+// import hamburguer from "../../img/hamburguer.png";
+import menu from '../../img/menu.svg'
 import * as C from "./HeaderStyles";
 
 const Header = () => {
@@ -25,10 +27,12 @@ const Header = () => {
       </C.ContainerInformationsUser>
 
       <C.ContainerLogoTitle>
-        <C.Text bold fontSize="2.5rem" color="white" margin="0px 10px">
-          Smart Wallet
-        </C.Text>
-        <img src={wallet} alt="carteira" width={60} />
+        <C.Container displayFlex alignItems="center">
+          <C.Title>Smart Wallet</C.Title>
+          <C.imgWallet src={wallet}></C.imgWallet>
+        </C.Container>
+
+        <C.imgMenuHamburguer src={menu}></C.imgMenuHamburguer>
       </C.ContainerLogoTitle>
 
       <C.ContainerNav>

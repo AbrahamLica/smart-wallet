@@ -73,11 +73,13 @@ export const MainContainer = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const FormContainer = styled.div<ContainerProps>`
   min-width: 80%;
-  min-height: 80vh;
+  max-width: 80%;
+  /* min-height: 70vh; */
   padding: 20px;
   display: flex;
   align-items: center;
@@ -90,6 +92,7 @@ export const FormContainer = styled.div<ContainerProps>`
 
 export const ContainerCategory = styled.div<ContainerProps>`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -97,6 +100,10 @@ export const ContainerCategory = styled.div<ContainerProps>`
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
+
+  @media (max-width: 500px) {
+    /* flex-direction: column; */
+  }
 `;
 
 export const ContainerInformations = styled.div<ContainerProps>`
@@ -109,6 +116,11 @@ export const ContainerInformations = styled.div<ContainerProps>`
   border: 1px solid black;
   border-radius: 10px;
   margin: 15px 0px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const ContainerSingleInformation = styled.div<ContainerProps>`
@@ -152,10 +164,20 @@ export const Link = styled.a<TextProps>`
 
 export const Input = styled.input<InputProps>`
   height: 30px;
+  width: 150px;
+
+  @media (max-width: 900px) {
+    width: 200px;
+  }
 `;
 
 export const Select = styled.select<TextProps>`
   height: 35px;
+  width: 150px;
+
+  @media (max-width: 900px) {
+    width: 200px;
+  }
 `;
 
 export const Option = styled.option<TextProps>`
@@ -170,23 +192,10 @@ export const ButtonAdd = styled.button<TextProps>`
   color: white;
   border-radius: 10px;
   cursor: pointer;
-`;
 
-export const Table = styled.table<ContainerProps>`
-  width: ${(props) => props.width};
-  height: ${(props) => props.heigth};
-  background-color: ${(props) => props.backgroundColor};
-  display: ${(props) => (props.displayFlex ? "flex" : "block")};
-  flex: ${(props) => props.flex};
-  flex-direction: ${(props) => (props.column ? "column" : "row")};
-  flex-wrap: ${(props) => props.flexWrap && "wrap"};
-  align-items: ${(props) => props.alignItems};
-  justify-content: ${(props) => props.justifyContent};
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-  border: ${(props) => props.border};
-  border-radius: ${(props) => props.borderRadius};
-  border-collapse: collapse;
+  @media (max-width: 900px) {
+    margin-top: 10px;
+  }
 `;
 
 export const Th = styled.th<ContainerProps>`
@@ -198,4 +207,15 @@ export const Th = styled.th<ContainerProps>`
 export const Td = styled.th<ContainerProps>`
   text-align: left;
   padding: 10px;
+`;
+
+export const ContainerTable = styled.div<ContainerProps>`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  @media (max-width: 600px) {
+    overflow-x: auto;
+  }
 `;

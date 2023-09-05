@@ -4,7 +4,7 @@ export type DataType = {
   titulo?: string;
   valor?: any;
   despesa?: any;
-  receita?: number;
+  receita?: any;
 };
 
 export type UserType = {

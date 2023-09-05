@@ -9,34 +9,46 @@ function App() {
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
   const [valor, setValor] = useState<string>("0,00");
-  const [balanco, setBalanco] = useState<number>(0);
+  const [balanco, setBalanco] = useState<any>(0);
   const [despesa, setDespesa] = useState<any>(0);
-  const [receita, setReceita] = useState<number>(0);
+  const [receita, setReceita] = useState<any>(0);
 
-  var calcDespesa: any = 0;
-  var calcReceita: any = 0;
-  var array: any = [];
-  var totalDespesa = 0;
-
-  function calcularDespesaTotal() {
-    
+  function calcularTudo() {
+    var totalDespesaFormatado = 0;
+    var totalReceitaFormatado = 0;
+    var totalBalanco = 0;
 
     for (let i = 0; i < state.data.length; i++) {
       if (state.data[i].despesa) {
-        totalDespesa += parseFloat(
-          state.data[i].despesa.slice(2).replace(",", ".")
+        totalDespesaFormatado += parseFloat(
+          state.data[i].despesa.slice(2).replace(".", "").replace(",", ".")
         );
       }
     }
+    setDespesa(formatMoney(totalDespesaFormatado.toFixed(2)));
 
-    setDespesa(totalDespesa);
+    for (let i = 0; i < state.data.length; i++) {
+      if (state.data[i].receita) {
+        totalReceitaFormatado += parseFloat(
+          state.data[i].receita.slice(2).replace(".", "").replace(",", ".")
+        );
+      }
+    }
+    setReceita(formatMoney(totalReceitaFormatado.toFixed(2)));
+    totalBalanco = totalReceitaFormatado - totalDespesaFormatado;
+
+    if (totalBalanco < 0) {
+      setBalanco("-" + formatMoney(Math.abs(totalBalanco).toFixed(2)));
+    } else {
+      setBalanco(formatMoney(totalBalanco.toFixed(2)));
+    }
   }
 
   useEffect(() => {
-    calcularDespesaTotal();
+    calcularTudo();
     setValor("0,00");
     setCategoria("Despesa");
-    setTitulo(""); //
+    setTitulo("");
   }, [state.data, dispatch]);
 
   const list = [
@@ -117,10 +129,6 @@ function App() {
     }
   }
 
-  function teste() {
-    console.log(state.data, despesa, totalDespesa);
-  }
-
   return (
     <C.MainContainer>
       <Header></Header>
@@ -129,17 +137,17 @@ function App() {
         <C.ContainerCategory>
           <C.ContainerSingleInformation>
             <C.TitleInformation>Receita</C.TitleInformation>
-            <C.Information>R$ {receita}</C.Information>
+            <C.Information>{receita}</C.Information>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
             <C.TitleInformation>Despesa</C.TitleInformation>
-            <C.Information>R$ {despesa}</C.Information>
+            <C.Information>{despesa}</C.Information>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
             <C.TitleInformation>Balanço</C.TitleInformation>
-            <C.Information>R$ {balanco}</C.Information>
+            <C.Information>{balanco}</C.Information>
           </C.ContainerSingleInformation>
         </C.ContainerCategory>
 
@@ -195,16 +203,9 @@ function App() {
           <C.ButtonAdd onClick={Add} type="button">
             Adicionar
           </C.ButtonAdd>
-
-          <button onClick={teste}>teste</button>
         </C.ContainerInformations>
 
-        <C.Container
-          width="100%"
-          padding="10px"
-          border="1px solid black"
-          borderRadius="10px"
-        >
+        <C.ContainerTable>
           <table>
             <thead>
               <tr>
@@ -225,7 +226,7 @@ function App() {
               </tbody>
             ))}
           </table>
-        </C.Container>
+        </C.ContainerTable>
       </C.FormContainer>
     </C.MainContainer>
   );
