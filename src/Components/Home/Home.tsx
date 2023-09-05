@@ -8,47 +8,60 @@ function App() {
   const [data, setData] = useState<any>(0);
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
-  const [valor, setValor] = useState<any>("");
+  const [valor, setValor] = useState<string>("0,00");
   const [balanco, setBalanco] = useState<number>(0);
-  const [despesa, setDespesa] = useState<number>(0);
+  const [despesa, setDespesa] = useState<any>(0);
   const [receita, setReceita] = useState<number>(0);
 
-  const formatter = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    minimumFractionDigits: 2,
-  });
+  var calcDespesa: any = 0;
+  var calcReceita: any = 0;
+  var array: any = [];
+  var totalDespesa = 0;
 
-  var calcDespesa: number = 0;
-  var calcReceita: number = 0;
-  var despesaFormatada: number = 1;
+  function calcularDespesaTotal() {
+    
 
-  useEffect(() => {
     for (let i = 0; i < state.data.length; i++) {
       if (state.data[i].despesa) {
-        calcDespesa += state.data[i].despesa!;
+        totalDespesa += parseFloat(
+          state.data[i].despesa.slice(2).replace(",", ".")
+        );
       }
     }
 
-    for (let i = 0; i < state.data.length; i++) {
-      if (state.data[i].receita) {
-        calcReceita += state.data[i].receita!;
-      }
-    }
+    setDespesa(totalDespesa);
+  }
 
-    var resultadoReceita: any = calcReceita - calcDespesa;
-    var newresultadoReceita: any = resultadoReceita.toFixed(2);
-
-    setDespesa(calcDespesa);
-    setReceita(calcReceita);
-    setBalanco(newresultadoReceita);
-  }, [valor, balanco, despesa, receita, state.data.length]);
+  useEffect(() => {
+    calcularDespesaTotal();
+    setValor("0,00");
+    setCategoria("Despesa");
+    setTitulo(""); //
+  }, [state.data, dispatch]);
 
   const list = [
     { id: 1, name: "Despesa" },
     { id: 2, name: "Extra" },
     { id: 3, name: "Salário" },
   ];
+
+  const formatMoney = (value: any) => {
+    if (typeof value !== "string") {
+      return "0,00"; // ou algum valor padrão apropriado
+    }
+
+    const numericValue = value.replace(/[^0-9]/g, "");
+    const formattedValue = (parseFloat(numericValue) / 100).toLocaleString(
+      "pt-BR",
+      {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      }
+    );
+
+    return formattedValue;
+  };
 
   function changeValueData(e: ChangeEvent<HTMLDataElement>) {
     setData(e.target.value);
@@ -63,18 +76,16 @@ function App() {
   }
 
   function changeValueValor(e: ChangeEvent<HTMLInputElement>) {
-    setValor(e.target.valueAsNumber);
+    setValor(formatMoney(e.target.value));
   }
 
   function Add() {
+    let day = data.slice(8, 10);
+    let month = data.slice(5, 7);
+    let year = data.slice(0, 4);
+    let dateFullFixed = `${day}/${month}/${year}`;
 
-    let dateFull = data;
-    let day = dateFull.slice(7, 9);
-    let month = dateFull.slice(5, 6);
-    let year = dateFull.slice(0, 3);
-    let dateFullFixed = `${day}-${month}-${year}`;
-
-    if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
+    if (data == 0 || categoria == "" || titulo == "" || valor == "0,00") {
       alert("Por favor, preencha todos os dados antes de adicionar!");
     } else {
       if (categoria == "Despesa") {
@@ -101,9 +112,13 @@ function App() {
         });
       }
       setData(0);
-      setValor(0);
+      setValor("0,00");
       setTitulo("");
     }
+  }
+
+  function teste() {
+    console.log(state.data, despesa, totalDespesa);
   }
 
   return (
@@ -114,12 +129,12 @@ function App() {
         <C.ContainerCategory>
           <C.ContainerSingleInformation>
             <C.TitleInformation>Receita</C.TitleInformation>
-            <C.Information>R$ {receita.toFixed(2)}</C.Information>
+            <C.Information>R$ {receita}</C.Information>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
             <C.TitleInformation>Despesa</C.TitleInformation>
-            <C.Information>R$ {despesa.toFixed(2)}</C.Information>
+            <C.Information>R$ {despesa}</C.Information>
           </C.ContainerSingleInformation>
 
           <C.ContainerSingleInformation>
@@ -169,7 +184,7 @@ function App() {
           <C.ContainerSingleInformation>
             <C.TitleInformation>Valor</C.TitleInformation>
             <C.Input
-              type="number"
+              type="string"
               onChange={changeValueValor}
               value={valor}
               name="value"
@@ -180,6 +195,8 @@ function App() {
           <C.ButtonAdd onClick={Add} type="button">
             Adicionar
           </C.ButtonAdd>
+
+          <button onClick={teste}>teste</button>
         </C.ContainerInformations>
 
         <C.Container
@@ -203,7 +220,7 @@ function App() {
                   <C.Td>{item.data}</C.Td>
                   <C.Td>{item.categoria}</C.Td>
                   <C.Td>{item.titulo}</C.Td>
-                  <C.Td>{item.valor}</C.Td>
+                  <C.Td>{formatMoney(item.valor)}</C.Td>
                 </tr>
               </tbody>
             ))}

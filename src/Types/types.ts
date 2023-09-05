@@ -2,8 +2,8 @@ export type DataType = {
   data?: any;
   categoria?: string;
   titulo?: string;
-  valor?: number;
-  despesa?: number;
+  valor?: any;
+  despesa?: any;
   receita?: number;
 };
 
