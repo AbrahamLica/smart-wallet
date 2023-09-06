@@ -35,6 +35,12 @@ export type TextProps = {
   zIndex?: boolean;
 };
 
+export type ContainerCart = {
+  width?: string;
+  heigth?: string;
+  padding?: string;
+};
+
 export const Container = styled.div<ContainerProps>`
   color: ${(props) => props.color};
   width: ${(props) => props.width};
@@ -115,16 +121,16 @@ export const ContainerLogoTitle = styled.div<ContainerProps>`
   /* background-color: red; */
 
   @media (max-width: 780px) {
-      flex-direction: column;
-    }
+    flex-direction: column;
+  }
 `;
 
 export const imgWallet = styled.img<ContainerProps>`
   width: 50px;
 
   @media (max-width: 780px) {
-      width: 35px;
-    }
+    width: 35px;
+  }
 `;
 
 export const imgMenuHamburguer = styled.img<ContainerProps>`
@@ -133,11 +139,9 @@ export const imgMenuHamburguer = styled.img<ContainerProps>`
   cursor: pointer;
 
   @media (max-width: 780px) {
-      display: block;
-    }
+    display: block;
+  }
 `;
-
-
 
 export const ContainerNav = styled.nav<ContainerProps>`
   display: flex;
@@ -171,4 +175,18 @@ export const Title = styled.h1<ContainerProps>`
   @media (max-width: 780px) {
     font-size: 1.4rem;
   }
+`;
+
+export const ContainerMenuHamburguer = styled.div<ContainerProps>`
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  transition: 0.4s;
 `;
