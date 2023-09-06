@@ -178,15 +178,75 @@ export const Title = styled.h1<ContainerProps>`
 `;
 
 export const ContainerMenuHamburguer = styled.div<ContainerProps>`
+  position: fixed;
   display: none;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
   width: 100%;
+  /* overflow: hidden; */
   background-color: black;
-  z-index: 1;
-  position: absolute;
   top: 0;
+  left: 0;
   transition: 0.4s;
+  z-index: 1;
+`;
+
+export const IconClose = styled.img<ContainerProps>`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  cursor: pointer;
+`;
+
+export const ContainerCategory = styled.div<ContainerProps>`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  min-height: 100px;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px;
+`;
+
+export const ContainerInformations = styled.div<ContainerProps>`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 15px 0px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const ContainerSingleInformation = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TitleInformation = styled.p<TextProps>`
+  font-size: 1.4rem;
+  color: white;
+  font-weight: bold;
+
+  @media (max-width: 425px) {
+      font-size: 0.8rem;
+    }
+`;
+
+export const Information = styled.p<TextProps>`
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
 `;

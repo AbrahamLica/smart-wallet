@@ -13,6 +13,24 @@ function App() {
   const [despesa, setDespesa] = useState<any>(0);
   const [receita, setReceita] = useState<any>(0);
 
+  const formatMoney = (value: any) => {
+    if (typeof value !== "string") {
+      return "0,00"; // ou algum valor padrão apropriado
+    }
+
+    const numericValue = value.replace(/[^0-9]/g, "");
+    const formattedValue = (parseFloat(numericValue) / 100).toLocaleString(
+      "pt-BR",
+      {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      }
+    );
+
+    return formattedValue;
+  };
+
   function calcularTudo() {
     var totalDespesaFormatado = 0;
     var totalReceitaFormatado = 0;
@@ -56,24 +74,6 @@ function App() {
     { id: 2, name: "Extra" },
     { id: 3, name: "Salário" },
   ];
-
-  const formatMoney = (value: any) => {
-    if (typeof value !== "string") {
-      return "0,00"; // ou algum valor padrão apropriado
-    }
-
-    const numericValue = value.replace(/[^0-9]/g, "");
-    const formattedValue = (parseFloat(numericValue) / 100).toLocaleString(
-      "pt-BR",
-      {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 2,
-      }
-    );
-
-    return formattedValue;
-  };
 
   function changeValueData(e: ChangeEvent<HTMLDataElement>) {
     setData(e.target.value);
