@@ -1,4 +1,4 @@
-export type DataType = {
+export type DataType = { 
   data?: any;
   categoria?: string;
   titulo?: string;
@@ -14,6 +14,10 @@ export type UserType = {
   sex: string;
   img: string;
 };
+
+export type OthersType = {
+  menuIsOpen: boolean
+}
 
 export type ActionType = {
   type: string;
@@ -34,4 +38,5 @@ export type ContextType = {
 export type InitialStateContextType = {
   data: DataType[];
   user: UserType;
+  others: OthersType
 };

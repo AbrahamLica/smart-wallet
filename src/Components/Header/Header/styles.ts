@@ -90,28 +90,6 @@ export const ContainerHeader = styled.div<ContainerProps>`
   }
 `;
 
-export const ContainerInformationsUser = styled.div<ContainerProps>`
-  justify-self: start;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  grid-area: A1;
-
-  p {
-    margin: 0;
-  }
-
-  @media (max-width: 900px) {
-    p {
-      font-size: 0.9rem;
-    }
-  }
-
-  @media (max-width: 780px) {
-    display: none;
-  }
-`;
-
 export const ContainerLogoTitle = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
@@ -125,14 +103,6 @@ export const ContainerLogoTitle = styled.div<ContainerProps>`
   }
 `;
 
-export const imgWallet = styled.img<ContainerProps>`
-  width: 50px;
-
-  @media (max-width: 780px) {
-    width: 35px;
-  }
-`;
-
 export const imgMenuHamburguer = styled.img<ContainerProps>`
   display: none;
   width: 25px;
@@ -140,132 +110,5 @@ export const imgMenuHamburguer = styled.img<ContainerProps>`
 
   @media (max-width: 780px) {
     display: block;
-  }
-`;
-
-export const ContainerNav = styled.nav<ContainerProps>`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  justify-self: end;
-  width: 100%;
-  grid-area: A3;
-
-  img {
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-
-  @media (max-width: 780px) {
-    display: none;
-  }
-`;
-
-export const Title = styled.h1<ContainerProps>`
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-right: 10px;
-  color: white;
-
-  @media (max-width: 990px) {
-    font-size: 1.8rem;
-  }
-
-  @media (max-width: 780px) {
-    font-size: 1.4rem;
-  }
-`;
-
-export const ContainerMenuHamburguer = styled.div<ContainerProps>`
-  position: fixed;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: black;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  transition: 0.4s;
-  z-index: 1;
-  overflow-y: auto;
-`;
-
-export const IconClose = styled.img<ContainerProps>`
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 50px;
-  cursor: pointer;
-`;
-
-export const ContainerCategory = styled.div<ContainerProps>`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  min-height: 100px;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 10px;
-`;
-
-export const ContainerInformations = styled.div<ContainerProps>`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  width: 100%;
-  min-height: 100px;
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-  margin: 15px 0px;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-export const ContainerSingleInformation = styled.div<ContainerProps>`
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 570px) {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-`;
-
-export const TitleInformation = styled.p<TextProps>`
-  font-size: 1.4rem;
-  color: white;
-  font-weight: bold;
-
-  @media (max-width: 425px) {
-    font-size: 0.8rem;
-  }
-`;
-
-export const Information = styled.p<TextProps>`
-  font-size: 1.2rem;
-  color: white;
-  font-weight: bold;
-`;
-
-export const InformationsUserHamburguer = styled.p<ContainerProps>`
-  color: white;
-  text-align: center;
-  font-size: 1.7rem;
-
-  @media (max-width: 425px) {
-    font-size: 1.4rem;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 1.2rem;
   }
 `;

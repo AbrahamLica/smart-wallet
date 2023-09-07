@@ -4,6 +4,7 @@ import {
   ContextType,
   DataType,
   InitialStateContextType,
+  OthersType,
   UserType,
 } from "../Types/types";
 import { createContext, useReducer } from "react";
@@ -68,11 +69,31 @@ export function reducerUser(state: UserType, action: ActionType) {
   return state;
 }
 
+//////////////////////////////////////////////////////////////////////
+
+export const reducerOthersInitialState: OthersType = {
+  menuIsOpen: false
+};
+
+export function reducerOthers(state: OthersType, action: ActionType) {
+  switch (action.type) {
+    case "OPEN_MENU":
+      return {
+        ...state,
+        menuIsOpen: action.payload.menuIsOpen
+      };
+      break;
+  }
+
+  return state;
+}
+
 /////////////////////////  CONTEXT ///////////////////////////////////
 
 const ContextInitialState = {
   data: reducerDataInitialState,
   user: reducerUserInitialState,
+  others: reducerOthersInitialState
 };
 
 export const Context = createContext<ContextType>({
@@ -83,6 +104,7 @@ export const Context = createContext<ContextType>({
 const mainReducer = (state: InitialStateContextType, action: ActionType) => ({
   data: reducerData(state.data, action),
   user: reducerUser(state.user, action),
+  others: reducerOthers(state.others, action),
 });
 
 export function ContextProvider({ children }: ChildrenType) {
