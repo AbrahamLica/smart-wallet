@@ -183,14 +183,14 @@ export const ContainerMenuHamburguer = styled.div<ContainerProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
   width: 100%;
-  /* overflow: hidden; */
   background-color: black;
   top: 0;
   left: 0;
+  bottom: 0;
   transition: 0.4s;
   z-index: 1;
+  overflow-y: auto;
 `;
 
 export const IconClose = styled.img<ContainerProps>`
@@ -233,6 +233,11 @@ export const ContainerInformations = styled.div<ContainerProps>`
 export const ContainerSingleInformation = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 570px) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
 `;
 
 export const TitleInformation = styled.p<TextProps>`
@@ -241,12 +246,26 @@ export const TitleInformation = styled.p<TextProps>`
   font-weight: bold;
 
   @media (max-width: 425px) {
-      font-size: 0.8rem;
-    }
+    font-size: 0.8rem;
+  }
 `;
 
 export const Information = styled.p<TextProps>`
   font-size: 1.2rem;
   color: white;
   font-weight: bold;
+`;
+
+export const InformationsUserHamburguer = styled.p<ContainerProps>`
+  color: white;
+  text-align: center;
+  font-size: 1.7rem;
+
+  @media (max-width: 425px) {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.2rem;
+  }
 `;

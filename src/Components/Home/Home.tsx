@@ -3,8 +3,10 @@ import { ChangeEvent, useEffect, useState, useContext } from "react";
 import { Context } from "../../Context/Context";
 import Header from "../Header/Header";
 
-function App() {
+function App() { 
   const { state, dispatch } = useContext(Context);
+  const [filteredList, setFilteredList ] = useState()
+  const [currentMonth, setCurrentMonth] = useState()
   const [data, setData] = useState<any>(0);
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
@@ -12,6 +14,14 @@ function App() {
   const [balanco, setBalanco] = useState<any>(0);
   const [despesa, setDespesa] = useState<any>(0);
   const [receita, setReceita] = useState<any>(0);
+
+  
+  useEffect(() => {
+    calcularTudo();
+    setValor("0,00");
+    setCategoria("Despesa");
+    setTitulo("");
+  }, [state.data, dispatch]);
 
   const formatMoney = (value: any) => {
     if (typeof value !== "string") {
@@ -61,13 +71,6 @@ function App() {
       setBalanco(formatMoney(totalBalanco.toFixed(2)));
     }
   }
-
-  useEffect(() => {
-    calcularTudo();
-    setValor("0,00");
-    setCategoria("Despesa");
-    setTitulo("");
-  }, [state.data, dispatch]);
 
   const list = [
     { id: 1, name: "Despesa" },
@@ -127,6 +130,11 @@ function App() {
       setValor("0,00");
       setTitulo("");
     }
+  }
+
+  function teste() {
+    console.log(state.data);
+    console.log(despesa);
   }
 
   return (
@@ -203,6 +211,8 @@ function App() {
           <C.ButtonAdd onClick={Add} type="button">
             Adicionar
           </C.ButtonAdd>
+
+          <button onClick={teste}>teste</button>
         </C.ContainerInformations>
 
         <C.ContainerTable>

@@ -118,30 +118,34 @@ const Header = () => {
           >
             <img src={state.user.img} alt="Usuario" width={150} />
             <C.Container margin="0 10px">
-              <C.Text color="white" fontSize="1.7rem" textAlign="center">{state.user.name}</C.Text>
-              <C.Text color="white" fontSize="1.7rem" textAlign="center">{state.user.age} anos</C.Text>
-              <C.Text color="white" fontSize="1.7rem" textAlign="center">{state.user.profession}</C.Text>
+              <C.InformationsUserHamburguer>
+                {state.user.name}
+              </C.InformationsUserHamburguer>
+              <C.InformationsUserHamburguer>
+                {state.user.age} anos
+              </C.InformationsUserHamburguer>
+              <C.InformationsUserHamburguer>
+                {state.user.profession}
+              </C.InformationsUserHamburguer>
             </C.Container>
           </C.Container>
 
           <C.ContainerCategory>
-          <C.ContainerSingleInformation>
-            <C.TitleInformation>Receita</C.TitleInformation>
-            <C.Information>{receita}</C.Information>
-          </C.ContainerSingleInformation>
+            <C.ContainerSingleInformation>
+              <C.TitleInformation>Receita</C.TitleInformation>
+              <C.Information>{receita}</C.Information>
+            </C.ContainerSingleInformation>
 
-          <C.ContainerSingleInformation>
-            <C.TitleInformation>Despesa</C.TitleInformation>
-            <C.Information>{despesa}</C.Information>
-          </C.ContainerSingleInformation>
+            <C.ContainerSingleInformation>
+              <C.TitleInformation>Despesa</C.TitleInformation>
+              <C.Information>{despesa}</C.Information>
+            </C.ContainerSingleInformation>
 
-          <C.ContainerSingleInformation>
-            <C.TitleInformation>Balanço</C.TitleInformation>
-            <C.Information>{balanco}</C.Information>
-          </C.ContainerSingleInformation>
-        </C.ContainerCategory>
-
-
+            <C.ContainerSingleInformation>
+              <C.TitleInformation>Balanço</C.TitleInformation>
+              <C.Information>{balanco}</C.Information>
+            </C.ContainerSingleInformation>
+          </C.ContainerCategory>
         </C.ContainerMenuHamburguer>
       </C.ContainerLogoTitle>
 

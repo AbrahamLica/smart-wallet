@@ -126,6 +126,11 @@ export const ContainerInformations = styled.div<ContainerProps>`
 export const ContainerSingleInformation = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 570px) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 `;
 
 export const TitleInformation = styled.p<TextProps>`
