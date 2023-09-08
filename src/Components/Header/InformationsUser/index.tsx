@@ -1,4 +1,3 @@
-import React from "react";
 import * as C from "./styles";
 import { useContext } from "react";
 import { Context } from "../../../Context/Context";

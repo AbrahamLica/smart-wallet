@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import * as C from "./styles";
 import { useEffect, useContext } from "react";
 import { Context } from "../../../Context/Context";
+import { formatMoney } from "../../../Helpers/Helpers";
+import { Add } from "../../../Helpers/Helpers";
 
 const FormInformations = () => {
   const { state, dispatch } = useContext(Context);
@@ -9,7 +11,7 @@ const FormInformations = () => {
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
   const [valor, setValor] = useState<string>("0,00");
-  
+
   useEffect(() => {
     setValor("0,00");
     setCategoria("Despesa");
@@ -21,24 +23,6 @@ const FormInformations = () => {
     { id: 2, name: "Extra" },
     { id: 3, name: "Salário" },
   ];
-
-  const formatMoney = (value: any) => {
-    if (typeof value !== "string") {
-      return "0,00";
-    }
-
-    const numericValue = value.replace(/[^0-9]/g, "");
-    const formattedValue = (parseFloat(numericValue) / 100).toLocaleString(
-      "pt-BR",
-      {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 2,
-      }
-    );
-
-    return formattedValue;
-  };
 
   function changeValueData(e: ChangeEvent<HTMLDataElement>) {
     setData(e.target.value);
@@ -56,48 +40,8 @@ const FormInformations = () => {
     setValor(formatMoney(e.target.value));
   }
 
-  function Add() {
-    let day = data.slice(8, 10);
-    let month = data.slice(5, 7);
-    let year = data.slice(0, 4);
-    let dateFullFixed = `${day}/${month}/${year}`;
-
-    if (data == 0 || categoria == "" || titulo == "" || valor == "0,00") {
-      alert("Por favor, preencha todos os dados antes de adicionar!");
-    } else {
-      if (categoria == "Despesa") {
-        dispatch({
-          type: "CADASTRAR_DESPESA",
-          payload: {
-            data: dateFullFixed,
-            categoria: categoria,
-            titulo: titulo,
-            valor: valor,
-            despesa: valor,
-          },
-        });
-      } else if (categoria == "Salário" || categoria == "Extra") {
-        dispatch({
-          type: "CADASTRAR_RECEITA",
-          payload: {
-            data: dateFullFixed,
-            categoria: categoria,
-            titulo: titulo,
-            valor: valor,
-            receita: valor,
-          },
-        });
-      }
-      setData(0);
-      setValor("0,00");
-      setTitulo("");
-    }
-  }
-
   return (
     <C.ContainerInformations>
-
-        
       <C.ContainerSingleInformation>
         <C.TitleInformation>Data</C.TitleInformation>
         <C.Input
@@ -146,11 +90,23 @@ const FormInformations = () => {
         ></C.Input>
       </C.ContainerSingleInformation>
 
-      <C.ButtonAdd onClick={Add} type="button">
+      <C.ButtonAdd
+        onClick={() =>
+          Add(
+            data,
+            categoria,
+            titulo,
+            valor,
+            setData,
+            setValor,
+            setTitulo,
+            dispatch
+          )
+        }
+        type="button"
+      >
         Adicionar
       </C.ButtonAdd>
-
-
     </C.ContainerInformations>
   );
 };

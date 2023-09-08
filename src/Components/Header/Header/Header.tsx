@@ -1,23 +1,15 @@
-import { Context } from "../../../Context/Context";
-import { useContext, useEffect, useState } from "react";
+import { handleToggleMenu } from "../../../Helpers/Helpers";
 import menu from "../../../img/menu.svg";
 import InformationsUser from "../InformationsUser";
 import MenuHamburguer from "../MenuHamburguer";
 import LogoAndTitle from "../LogoAndTitle";
 import Nav from "../Nav";
 import * as C from "./styles";
+import { Context } from "../../../Context/Context";
+import { useContext } from "react";
 
 const Header = () => {
   const { state, dispatch } = useContext(Context);
-
-  function handleToggleMenu() {
-    dispatch({
-      type: "OPEN_MENU",
-      payload: {
-        menuIsOpen: state.others.menuIsOpen ? false : true,
-      },
-    });
-  }
 
   const list = [
     { id: 1, name: "Despesa" },
@@ -34,7 +26,7 @@ const Header = () => {
 
         <C.imgMenuHamburguer
           src={menu}
-          onClick={handleToggleMenu}
+          onClick={() => handleToggleMenu(dispatch, state)}
         ></C.imgMenuHamburguer>
 
         <MenuHamburguer></MenuHamburguer>

@@ -4,7 +4,7 @@ import { Context } from "../../../Context/Context";
 import Header from "../../Header/Header/Header";
 import Category from "../Category";
 import FormInformations from "../FormInformations/FormInformations";
-import Table from "../Table";
+import Table from "../Table/index";
 
 function App() {
   const { state, dispatch } = useContext(Context);
@@ -17,11 +17,11 @@ function App() {
 
       <C.FormContainer>
 
-        <Category></Category>
+        {/* <Category></Category> */}
 
-        <FormInformations></FormInformations>
+        {/* <FormInformations></FormInformations> */}
 
-        <Table></Table>
+        {/* <Table></Table> */}
         
       </C.FormContainer>
     </C.MainContainer>
