@@ -14,7 +14,7 @@ const index = () => {
   }, []);
 
   return (
-    <C.ContainerCategory>
+    <C.ContainerFinancialSummary>
       <C.ContainerSingleInformation>
         <C.TitleInformation>Receita</C.TitleInformation>
         <C.Information>{receita}</C.Information>
@@ -29,7 +29,7 @@ const index = () => {
         <C.TitleInformation>Balanço</C.TitleInformation>
         <C.Information>{balanco}</C.Information>
       </C.ContainerSingleInformation>
-    </C.ContainerCategory>
+    </C.ContainerFinancialSummary>
   );
 };
 

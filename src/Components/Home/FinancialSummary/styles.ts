@@ -67,7 +67,7 @@ export const Container = styled.div<ContainerProps>`
   overflow: hidden;
 `;
 
-export const ContainerCategory = styled.div<ContainerProps>`
+export const ContainerFinancialSummary = styled.div<ContainerProps>`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

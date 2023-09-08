@@ -4,7 +4,7 @@ import * as C from "./styles";
 import { useContext } from "react";
 import { Context } from "../../../Context/Context";
 import { handleToggleMenu } from "../../../Helpers/Helpers";
-import Category from "../../Home/Category/index";
+import Category from "../../Home/FinancialSummary/index";
 import { calcularTudo } from "../../../Helpers/Helpers";
 
 const index = () => {

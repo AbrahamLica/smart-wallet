@@ -2,7 +2,7 @@ import * as C from "./styles";
 import { ChangeEvent, useEffect, useState, useContext } from "react";
 import { Context } from "../../../Context/Context";
 import Header from "../../Header/Header/Header";
-import Category from "../Category";
+import FinancialSummary from "../FinancialSummary";
 import FormInformations from "../FormInformations/FormInformations";
 import Table from "../Table/index";
 
@@ -16,13 +16,11 @@ function App() {
       <Header></Header>
 
       <C.FormContainer>
+        <FinancialSummary></FinancialSummary>
 
-        {/* <Category></Category> */}
+        <FormInformations></FormInformations>
 
-        {/* <FormInformations></FormInformations> */}
-
-        {/* <Table></Table> */}
-        
+        <Table></Table>
       </C.FormContainer>
     </C.MainContainer>
   );

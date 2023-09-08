@@ -2,8 +2,8 @@ import { ChangeEvent, useState } from "react";
 import * as C from "./styles";
 import { useEffect, useContext } from "react";
 import { Context } from "../../../Context/Context";
-import { formatMoney } from "../../../Helpers/Helpers";
 import { Add } from "../../../Helpers/Helpers";
+import { formatMoney } from "../../../Helpers/Helpers";
 
 const FormInformations = () => {
   const { state, dispatch } = useContext(Context);

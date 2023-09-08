@@ -1,5 +1,5 @@
 import { Context } from "../Context/Context";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 
 export function handleToggleMenu(dispatch: any, state: any) {
   dispatch({
@@ -110,3 +110,4 @@ export function Add(
     setTitulo("");
   }
 }
+

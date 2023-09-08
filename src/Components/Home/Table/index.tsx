@@ -1,27 +1,10 @@
 import React, { useContext } from "react";
 import * as C from "./styles";
 import { Context } from "../../../Context/Context";
+import { formatMoney } from "../../../Helpers/Helpers";
 
 const index = () => {
   const { state, dispatch } = useContext(Context);
-
-  const formatMoney = (value: any) => {
-    if (typeof value !== "string") {
-      return "0,00";
-    }
-
-    const numericValue = value.replace(/[^0-9]/g, "");
-    const formattedValue = (parseFloat(numericValue) / 100).toLocaleString(
-      "pt-BR",
-      {
-        style: "currency",
-        currency: "BRL",
-        minimumFractionDigits: 2,
-      }
-    );
-
-    return formattedValue;
-  };
 
   return (
     <C.ContainerTable>
