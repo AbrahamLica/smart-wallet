@@ -111,3 +111,137 @@ export function Add(
   }
 }
 
+export function choseImgUser(
+  e: any,
+  setImgUserSelected: any,
+  setImgUser1: any,
+  setImgUser2: any,
+  setImgUser3: any,
+  setImgUser4: any,
+  setImgUser5: any,
+  setImgUser6: any
+) {
+  if (e.target.alt == "user1") {
+    setImgUserSelected(e.target.src);
+    setImgUser1(true);
+    setImgUser2(false);
+    setImgUser3(false);
+    setImgUser4(false);
+    setImgUser5(false);
+    setImgUser6(false);
+  } else if (e.target.alt == "user2") {
+    setImgUserSelected(e.target.src);
+    setImgUser1(false);
+    setImgUser2(true);
+    setImgUser3(false);
+    setImgUser4(false);
+    setImgUser5(false);
+    setImgUser6(false);
+  } else if (e.target.alt == "user3") {
+    setImgUserSelected(e.target.src);
+    setImgUser1(false);
+    setImgUser2(false);
+    setImgUser3(true);
+    setImgUser4(false);
+    setImgUser5(false);
+    setImgUser6(false);
+  } else if (e.target.alt == "user4") {
+    setImgUserSelected(e.target.src);
+    setImgUser1(false);
+    setImgUser2(false);
+    setImgUser3(false);
+    setImgUser4(true);
+    setImgUser5(false);
+    setImgUser6(false);
+  } else if (e.target.alt == "user5") {
+    setImgUserSelected(e.target.src);
+    setImgUser1(false);
+    setImgUser2(false);
+    setImgUser3(false);
+    setImgUser4(false);
+    setImgUser5(true);
+    setImgUser6(false);
+  } else if (e.target.alt == "user6") {
+    setImgUserSelected(e.target.src);
+    setImgUser1(false);
+    setImgUser2(false);
+    setImgUser3(false);
+    setImgUser4(false);
+    setImgUser5(false);
+    setImgUser6(true);
+  }
+}
+
+export function changeSetName(e: ChangeEvent<HTMLInputElement>, setName: any) {
+  setName(e.target.value);
+}
+
+export function changeSetAge(e: ChangeEvent<HTMLInputElement>, setAge: any) {
+  setAge(e.target.valueAsNumber);
+}
+
+export function changeSetProfession(
+  e: ChangeEvent<HTMLInputElement>,
+  setProfession: any
+) {
+  setProfession(e.target.value);
+}
+
+export function setGender(e: any, setSex: any) {
+  setSex(e.target.value);
+}
+
+export function validateInputName(
+  name: string,
+  setSpanName: any,
+  setNameValid: any
+) {
+  if (!name) {
+    setSpanName('o campo "Nome" não pode estar vazio!');
+    setNameValid(false);
+  } else if (name.length >= 1 && name.length < 3) {
+    setSpanName("O campo 'Nome' não pode ter menos de 3 caracteres!");
+    setNameValid(false);
+  } else if (containsSpecialChars(name) == true) {
+    setSpanName("O campo 'Nome' não pode ter caracteres especiais!");
+    setNameValid(false);
+  } else {
+    setSpanName("");
+    setNameValid(true);
+  }
+}
+
+export function validateInputProfession(
+  profession: string,
+  setSpanProfession: any,
+  setProfessionValid: any
+) {
+  if (!profession) {
+    setSpanProfession('o campo "Profissão" não pode estar vazio!');
+    setProfessionValid(false);
+  } else if (profession.length >= 1 && profession.length < 2) {
+    setSpanProfession(
+      "O campo 'Profissão' não pode ter menos de 3 caracteres!"
+    );
+    setProfessionValid(false);
+  } else if (containsSpecialChars(profession) == true) {
+    setSpanProfession("O campo 'Profissão' não pode ter caracteres especiais!");
+    setProfessionValid(false);
+  } else if (containsNumbers(profession) == true) {
+    setSpanProfession("O campo 'Profissão' não pode ter números!");
+    setProfessionValid(false);
+  } else {
+    setSpanProfession("");
+    setProfessionValid(true);
+  }
+}
+
+export function containsSpecialChars(str: string) {
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  return specialChars.test(str);
+}
+
+export function containsNumbers(str: string) {
+  const specialChars = /[0-9]/g;
+  return specialChars.test(str);
+}
