@@ -12,9 +12,9 @@ import { choseImgUser } from "../../Helpers/Helpers";
 import { changeSetName } from "../../Helpers/Helpers";
 import { changeSetAge } from "../../Helpers/Helpers";
 import { changeSetProfession } from "../../Helpers/Helpers";
-import { setGender } from "../../Helpers/Helpers";
 import { validateInputName } from "../../Helpers/Helpers";
 import { validateInputProfession } from "../../Helpers/Helpers";
+import { setGender } from "../../Helpers/Helpers";
 
 const Login = () => {
   const { state, dispatch } = useContext(Context);
@@ -33,7 +33,7 @@ const Login = () => {
   const [spanProfession, setSpanProfession] = useState("");
   const [nameValid, setNameValid] = useState<boolean>(false);
   const [professionValid, setProfessionValid] = useState<boolean>(false);
-  const [ageValid, setAgeValid] = useState<boolean>(true);
+  const [ageValid, setAgeValid] = useState<boolean>(false);
   const [sexValid, setSexValid] = useState<boolean>(false);
   const [imgValid, setImgValid] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ const Login = () => {
 
   function logIn() {
     if (age && age > 10 && age < 99) {
-      setSexValid(true);
+      setAgeValid(true);
     }
 
     if (sex) {
@@ -89,7 +89,7 @@ const Login = () => {
             type="text"
             placeholder="Nome"
             onChange={(e) => changeSetName(e, setName)}
-            onBlur={() => validateInputName(name, setSpanName, nameValid)}
+            onBlur={() => validateInputName(name, setSpanName, setNameValid)}
             name="name"
           ></C.InputText>
           <C.Span>
@@ -102,7 +102,7 @@ const Login = () => {
             type="number"
             placeholder="Idade"
             min={10}
-            onChange={(e) => changeSetAge(e, setAge)}
+            onChange={(e) => changeSetAge(e, setAge, setAgeValid)}
             name="number"
           ></C.InputNumber>
         </C.ContainerLabelInput>
@@ -116,7 +116,7 @@ const Login = () => {
               validateInputProfession(
                 profession,
                 setSpanProfession,
-                professionValid
+                setProfessionValid
               )
             }
             name="profession"
@@ -143,7 +143,7 @@ const Login = () => {
               name="sex"
               id="masculino"
               value="male"
-              onChange={(e) => setGender(e, setSex)}
+              onChange={(e) => setGender(e, setSex, setSexValid)}
               checked={sex == "male"}
             ></C.InputRadio>
             <C.Label htmlFor="feminino" margin="0 10px 0 10px">
@@ -154,7 +154,7 @@ const Login = () => {
               name="sex"
               id="feminino"
               value="female"
-              onChange={(e) => setGender(e, setSex)}
+              onChange={(e) => setGender(e, setSex, setSexValid)}
               checked={sex == "female"}
             ></C.InputRadio>
           </C.Container>
@@ -184,7 +184,8 @@ const Login = () => {
                   setImgUser3,
                   setImgUser4,
                   setImgUser5,
-                  setImgUser6
+                  setImgUser6,
+                  setImgValid
                 )
               }
               style={{ border: imgUser2 ? "1px solid black" : "" }}
@@ -201,7 +202,8 @@ const Login = () => {
                   setImgUser3,
                   setImgUser4,
                   setImgUser5,
-                  setImgUser6
+                  setImgUser6,
+                  setImgValid
                 )
               }
               style={{ border: imgUser3 ? "1px solid black" : "" }}
@@ -218,7 +220,8 @@ const Login = () => {
                   setImgUser3,
                   setImgUser4,
                   setImgUser5,
-                  setImgUser6
+                  setImgUser6,
+                  setImgValid
                 )
               }
               style={{ border: imgUser4 ? "1px solid black" : "" }}
@@ -238,7 +241,8 @@ const Login = () => {
                   setImgUser3,
                   setImgUser4,
                   setImgUser5,
-                  setImgUser6
+                  setImgUser6,
+                  setImgValid
                 )
               }
               style={{ border: imgUser1 ? "1px solid black" : "" }}
@@ -255,7 +259,8 @@ const Login = () => {
                   setImgUser3,
                   setImgUser4,
                   setImgUser5,
-                  setImgUser6
+                  setImgUser6,
+                  setImgValid
                 )
               }
               style={{ border: imgUser5 ? "1px solid black" : "" }}
@@ -272,7 +277,8 @@ const Login = () => {
                   setImgUser3,
                   setImgUser4,
                   setImgUser5,
-                  setImgUser6
+                  setImgUser6,
+                  setImgValid
                 )
               }
               style={{ border: imgUser6 ? "1px solid black" : "" }}

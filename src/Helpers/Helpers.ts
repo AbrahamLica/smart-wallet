@@ -119,10 +119,12 @@ export function choseImgUser(
   setImgUser3: any,
   setImgUser4: any,
   setImgUser5: any,
-  setImgUser6: any
+  setImgUser6: any,
+  setImgValid: any
 ) {
   if (e.target.alt == "user1") {
     setImgUserSelected(e.target.src);
+    setImgValid(true);
     setImgUser1(true);
     setImgUser2(false);
     setImgUser3(false);
@@ -131,6 +133,7 @@ export function choseImgUser(
     setImgUser6(false);
   } else if (e.target.alt == "user2") {
     setImgUserSelected(e.target.src);
+    setImgValid(true);
     setImgUser1(false);
     setImgUser2(true);
     setImgUser3(false);
@@ -139,6 +142,7 @@ export function choseImgUser(
     setImgUser6(false);
   } else if (e.target.alt == "user3") {
     setImgUserSelected(e.target.src);
+    setImgValid(true);
     setImgUser1(false);
     setImgUser2(false);
     setImgUser3(true);
@@ -147,6 +151,7 @@ export function choseImgUser(
     setImgUser6(false);
   } else if (e.target.alt == "user4") {
     setImgUserSelected(e.target.src);
+    setImgValid(true);
     setImgUser1(false);
     setImgUser2(false);
     setImgUser3(false);
@@ -155,6 +160,7 @@ export function choseImgUser(
     setImgUser6(false);
   } else if (e.target.alt == "user5") {
     setImgUserSelected(e.target.src);
+    setImgValid(true);
     setImgUser1(false);
     setImgUser2(false);
     setImgUser3(false);
@@ -163,6 +169,7 @@ export function choseImgUser(
     setImgUser6(false);
   } else if (e.target.alt == "user6") {
     setImgUserSelected(e.target.src);
+    setImgValid(true);
     setImgUser1(false);
     setImgUser2(false);
     setImgUser3(false);
@@ -176,8 +183,13 @@ export function changeSetName(e: ChangeEvent<HTMLInputElement>, setName: any) {
   setName(e.target.value);
 }
 
-export function changeSetAge(e: ChangeEvent<HTMLInputElement>, setAge: any) {
+export function changeSetAge(
+  e: ChangeEvent<HTMLInputElement>,
+  setAge: any,
+  setAgeValid: any
+) {
   setAge(e.target.valueAsNumber);
+  setAgeValid(true);
 }
 
 export function changeSetProfession(
@@ -185,10 +197,6 @@ export function changeSetProfession(
   setProfession: any
 ) {
   setProfession(e.target.value);
-}
-
-export function setGender(e: any, setSex: any) {
-  setSex(e.target.value);
 }
 
 export function validateInputName(
@@ -244,4 +252,9 @@ export function containsSpecialChars(str: string) {
 export function containsNumbers(str: string) {
   const specialChars = /[0-9]/g;
   return specialChars.test(str);
+}
+
+export function setGender(e: any, setSex:any, setSexValid:any) {
+  setSex(e.target.value);
+  setSexValid(true);
 }
