@@ -15,6 +15,8 @@ import { changeSetProfession } from "../../Helpers/Helpers";
 import { validateInputName } from "../../Helpers/Helpers";
 import { validateInputProfession } from "../../Helpers/Helpers";
 import { setGender } from "../../Helpers/Helpers";
+import { validateInputAge } from "../../Helpers/Helpers";
+import { addAllErrorsToAlert } from "../../Helpers/Helpers";
 
 const Login = () => {
   const { state, dispatch } = useContext(Context);
@@ -31,31 +33,22 @@ const Login = () => {
   const [imgUser6, setImgUser6] = useState(false);
   const [spanName, setSpanName] = useState<string>("");
   const [spanProfession, setSpanProfession] = useState("");
+  const [spanAge, setSpanAge] = useState("");
   const [nameValid, setNameValid] = useState<boolean>(false);
   const [professionValid, setProfessionValid] = useState<boolean>(false);
   const [ageValid, setAgeValid] = useState<boolean>(false);
   const [sexValid, setSexValid] = useState<boolean>(false);
-  const [imgValid, setImgValid] = useState<boolean>(false);
+  const [avatarValid, setavatarValid] = useState<boolean>(false);
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
   function logIn() {
-    if (age && age > 10 && age < 99) {
-      setAgeValid(true);
-    }
-
-    if (sex) {
-      setSexValid(true);
-    }
-
-    if (imgUserSelected) {
-      setImgValid(true);
-    }
-
     validateInputName(name, setSpanName, setNameValid);
+    validateInputAge(age, setAgeValid, setSpanAge);
     validateInputProfession(profession, setSpanProfession, setProfessionValid);
 
-    if (nameValid && ageValid && professionValid && sexValid && imgValid) {
+    if (nameValid && ageValid && professionValid && sexValid && avatarValid) {
       dispatch({
         type: "LOG_IN",
         payload: {
@@ -67,17 +60,24 @@ const Login = () => {
         },
       });
       navigate("/Home");
-    } else if (!nameValid) {
-      alert("Verifique o campo 'Nome'.");
-    } else if (!ageValid) {
-      alert("Verifique o campo 'Idade'.");
-    } else if (!professionValid) {
-      alert("Verifique o campo 'Profissão'.");
-    } else if (!sexValid) {
-      alert("Verifique se o seu Gênero está marcado.");
-    } else if (!imgValid) {
-      alert("Por favor, Escolha um avatar.");
+    } else {
+      addAllErrorsToAlert(
+        nameValid,
+        ageValid,
+        professionValid,
+        sexValid,
+        avatarValid,
+        errors,
+        setErrors
+      );
     }
+  }
+
+  function teste() {
+    // let teste = [...erros];
+    // teste.push("caraca meu");
+    // setErros(teste);
+    console.log(errors);
   }
 
   return (
@@ -103,8 +103,12 @@ const Login = () => {
             placeholder="Idade"
             min={10}
             onChange={(e) => changeSetAge(e, setAge, setAgeValid)}
+            onBlur={() => validateInputAge(age, setAgeValid, setSpanAge)}
             name="number"
           ></C.InputNumber>
+          <C.Span>
+            <C.Text fontSize="0.8rem">{spanAge}</C.Text>
+          </C.Span>
         </C.ContainerLabelInput>
 
         <C.ContainerLabelInput>
@@ -185,7 +189,7 @@ const Login = () => {
                   setImgUser4,
                   setImgUser5,
                   setImgUser6,
-                  setImgValid
+                  setavatarValid
                 )
               }
               style={{ border: imgUser2 ? "1px solid black" : "" }}
@@ -203,7 +207,7 @@ const Login = () => {
                   setImgUser4,
                   setImgUser5,
                   setImgUser6,
-                  setImgValid
+                  setavatarValid
                 )
               }
               style={{ border: imgUser3 ? "1px solid black" : "" }}
@@ -221,7 +225,7 @@ const Login = () => {
                   setImgUser4,
                   setImgUser5,
                   setImgUser6,
-                  setImgValid
+                  setavatarValid
                 )
               }
               style={{ border: imgUser4 ? "1px solid black" : "" }}
@@ -242,7 +246,7 @@ const Login = () => {
                   setImgUser4,
                   setImgUser5,
                   setImgUser6,
-                  setImgValid
+                  setavatarValid
                 )
               }
               style={{ border: imgUser1 ? "1px solid black" : "" }}
@@ -260,7 +264,7 @@ const Login = () => {
                   setImgUser4,
                   setImgUser5,
                   setImgUser6,
-                  setImgValid
+                  setavatarValid
                 )
               }
               style={{ border: imgUser5 ? "1px solid black" : "" }}
@@ -278,7 +282,7 @@ const Login = () => {
                   setImgUser4,
                   setImgUser5,
                   setImgUser6,
-                  setImgValid
+                  setavatarValid
                 )
               }
               style={{ border: imgUser6 ? "1px solid black" : "" }}
@@ -289,6 +293,10 @@ const Login = () => {
         <C.ButtonSend onClick={logIn} type="button">
           Entrar
         </C.ButtonSend>
+
+        <button onClick={teste} type="button">
+          teste
+        </button>
       </C.ContainerModal>
     </C.MainContainerModal>
   );
