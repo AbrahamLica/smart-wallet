@@ -120,10 +120,12 @@ export function addAllErrorsToAlert(
     arrayErrors.push("Avatar");
   }
 
-  const str = arrayErrors.toString()
+  const str = arrayErrors.toString();
 
-  const newStr = str.replace('Nome', 'monkey')
-  console.log(str)
+  const newStr = str.replace(/,/g, " ");
+
+  console.log(str);
+  console.log(newStr);
 }
 
 // Others
