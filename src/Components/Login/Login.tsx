@@ -25,12 +25,20 @@ const Login = () => {
   const [profession, setProfession] = useState<string>("");
   const [sex, setSex] = useState<string>("");
   const [imgUserSelected, setImgUserSelected] = useState<string>("");
-  const [imgUser1, setImgUser1] = useState(false);
-  const [imgUser2, setImgUser2] = useState(false);
-  const [imgUser3, setImgUser3] = useState(false);
-  const [imgUser4, setImgUser4] = useState(false);
-  const [imgUser5, setImgUser5] = useState(false);
-  const [imgUser6, setImgUser6] = useState(false);
+  // const [imgUser1, setImgUser1] = useState(false);
+  // const [imgUser2, setImgUser2] = useState(false);
+  // const [imgUser3, setImgUser3] = useState(false);
+  // const [imgUser4, setImgUser4] = useState(false);
+  // const [imgUser5, setImgUser5] = useState(false);
+  // const [imgUser6, setImgUser6] = useState(false);
+  const [imageStates, setImageStates] = useState({
+    user1: false,
+    user2: false,
+    user3: false,
+    user4: false,
+    user5: false,
+    user6: false,
+  });
   const [spanName, setSpanName] = useState<string>("");
   const [spanProfession, setSpanProfession] = useState("");
   const [spanAge, setSpanAge] = useState("");
@@ -38,7 +46,7 @@ const Login = () => {
   const [professionValid, setProfessionValid] = useState<boolean>(false);
   const [ageValid, setAgeValid] = useState<boolean>(false);
   const [sexValid, setSexValid] = useState<boolean>(false);
-  const [avatarValid, setavatarValid] = useState<boolean>(false);
+  const [avatarValid, setAvatarValid] = useState<boolean>(false);
   const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
@@ -69,6 +77,19 @@ const Login = () => {
         avatarValid
       );
     }
+  }
+
+  function handleImgUserClick(e: any, img: string) {
+    choseImgUser(
+      e,
+      setImgUserSelected,
+      setImageStates({ ...imageStates, [img]: true }),
+      setAvatarValid
+    );
+  }
+
+  function teste() {
+    console.log(imageStates);
   }
 
   return (
@@ -165,117 +186,47 @@ const Login = () => {
           <C.ImgUser
             src={user2}
             alt="user2"
-            onClick={(e) =>
-              choseImgUser(
-                e,
-                setImgUserSelected,
-                setImgUser1,
-                setImgUser2,
-                setImgUser3,
-                setImgUser4,
-                setImgUser5,
-                setImgUser6,
-                setavatarValid
-              )
-            }
-            style={{ border: imgUser2 ? "1px solid black" : "" }}
+            onClick={(e) => handleImgUserClick(e, "user2")}
+            style={{ border: imageStates.user2 ? "1px solid black" : "" }}
           />
           <C.ImgUser
             src={user3}
             alt="user3"
-            onClick={(e) =>
-              choseImgUser(
-                e,
-                setImgUserSelected,
-                setImgUser1,
-                setImgUser2,
-                setImgUser3,
-                setImgUser4,
-                setImgUser5,
-                setImgUser6,
-                setavatarValid
-              )
-            }
-            style={{ border: imgUser3 ? "1px solid black" : "" }}
+            onClick={(e) => handleImgUserClick(e, "user3")}
+            style={{ border: imageStates.user3 ? "1px solid black" : "" }}
           />
           <C.ImgUser
             src={user4}
             alt="user4"
-            onClick={(e) =>
-              choseImgUser(
-                e,
-                setImgUserSelected,
-                setImgUser1,
-                setImgUser2,
-                setImgUser3,
-                setImgUser4,
-                setImgUser5,
-                setImgUser6,
-                setavatarValid
-              )
-            }
-            style={{ border: imgUser4 ? "1px solid black" : "" }}
+            onClick={(e) => handleImgUserClick(e, "user4")}
+            style={{ border: imageStates.user4 ? "1px solid black" : "" }}
           />
 
           <C.ImgUser
             src={user1}
             alt="user1"
-            onClick={(e) =>
-              choseImgUser(
-                e,
-                setImgUserSelected,
-                setImgUser1,
-                setImgUser2,
-                setImgUser3,
-                setImgUser4,
-                setImgUser5,
-                setImgUser6,
-                setavatarValid
-              )
-            }
-            style={{ border: imgUser1 ? "1px solid black" : "" }}
+            onClick={(e) => handleImgUserClick(e, "user1")}
+            style={{ border: imageStates.user1 ? "1px solid black" : "" }}
           />
           <C.ImgUser
             src={user5}
             alt="user5"
-            onClick={(e) =>
-              choseImgUser(
-                e,
-                setImgUserSelected,
-                setImgUser1,
-                setImgUser2,
-                setImgUser3,
-                setImgUser4,
-                setImgUser5,
-                setImgUser6,
-                setavatarValid
-              )
-            }
-            style={{ border: imgUser5 ? "1px solid black" : "" }}
+            onClick={(e) => handleImgUserClick(e, "user5")}
+            style={{ border: imageStates.user5 ? "1px solid black" : "" }}
           />
           <C.ImgUser
             src={user6}
             alt="user6"
-            onClick={(e) =>
-              choseImgUser(
-                e,
-                setImgUserSelected,
-                setImgUser1,
-                setImgUser2,
-                setImgUser3,
-                setImgUser4,
-                setImgUser5,
-                setImgUser6,
-                setavatarValid
-              )
-            }
-            style={{ border: imgUser6 ? "1px solid black" : "" }}
+            onClick={(e) => handleImgUserClick(e, "user6")}
+            style={{ border: imageStates.user6 ? "1px solid black" : "" }}
           />
         </C.ContainerAvatars>
 
         <C.ButtonSend onClick={logIn} type="button">
           Entrar
         </C.ButtonSend>
+
+        <button onClick={teste} type="button">teste</button>
       </C.ContainerModal>
     </C.MainContainerModal>
   );

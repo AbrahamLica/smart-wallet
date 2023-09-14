@@ -255,67 +255,21 @@ export function Add(
 export function choseImgUser(
   e: any,
   setImgUserSelected: any,
-  setImgUser1: any,
-  setImgUser2: any,
-  setImgUser3: any,
-  setImgUser4: any,
-  setImgUser5: any,
-  setImgUser6: any,
-  setavatarValid: any
+  setImageStates: any,
+  setAvatarValid: any
 ) {
-  if (e.target.alt == "user1") {
-    setImgUserSelected(e.target.src);
-    setavatarValid(true);
-    setImgUser1(true);
-    setImgUser2(false);
-    setImgUser3(false);
-    setImgUser4(false);
-    setImgUser5(false);
-    setImgUser6(false);
-  } else if (e.target.alt == "user2") {
-    setImgUserSelected(e.target.src);
-    setavatarValid(true);
-    setImgUser1(false);
-    setImgUser2(true);
-    setImgUser3(false);
-    setImgUser4(false);
-    setImgUser5(false);
-    setImgUser6(false);
-  } else if (e.target.alt == "user3") {
-    setImgUserSelected(e.target.src);
-    setavatarValid(true);
-    setImgUser1(false);
-    setImgUser2(false);
-    setImgUser3(true);
-    setImgUser4(false);
-    setImgUser5(false);
-    setImgUser6(false);
-  } else if (e.target.alt == "user4") {
-    setImgUserSelected(e.target.src);
-    setavatarValid(true);
-    setImgUser1(false);
-    setImgUser2(false);
-    setImgUser3(false);
-    setImgUser4(true);
-    setImgUser5(false);
-    setImgUser6(false);
-  } else if (e.target.alt == "user5") {
-    setImgUserSelected(e.target.src);
-    setavatarValid(true);
-    setImgUser1(false);
-    setImgUser2(false);
-    setImgUser3(false);
-    setImgUser4(false);
-    setImgUser5(true);
-    setImgUser6(false);
-  } else if (e.target.alt == "user6") {
-    setImgUserSelected(e.target.src);
-    setavatarValid(true);
-    setImgUser1(false);
-    setImgUser2(false);
-    setImgUser3(false);
-    setImgUser4(false);
-    setImgUser5(false);
-    setImgUser6(true);
-  }
+  const selectedImage = e.target.alt;
+  setImgUserSelected(e.target.src);
+  setAvatarValid(true);
+
+  // setImageStates((prevState: any) => {
+  //   const updatedImageStates = { ...prevState };
+  //   // Define todas as imagens para false
+  //   for (const key in updatedImageStates) {
+  //     updatedImageStates[key] = false;
+  //   }
+  //   // Define a imagem selecionada como true
+  //   updatedImageStates[selectedImage] = true;
+  //   return updatedImageStates;
+  // });
 }
