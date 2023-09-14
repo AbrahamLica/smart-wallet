@@ -113,16 +113,21 @@ export const ContainerModal = styled.form<ContainerProps>`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
   min-width: 30vw;
   z-index: 10;
   border-radius: 20px;
   box-shadow: 2px 2px #323232;
   border: 2px solid #323232;
+  max-height: 90vh;
+
+  @media (max-width: 768px) {
+    width: 40%;
+  }
 
   @media (max-width: 425px) {
-    width: 90%;
+    width: 70%;
   }
 `;
 
@@ -130,7 +135,7 @@ export const ContainerLabelInput = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 10px;
+  /* padding: 10px; */
   width: 90%;
 
   @media (max-width: 1024px) {
@@ -201,8 +206,17 @@ export const ButtonSend = styled.button<ContainerProps>`
   }
 `;
 
+export const ContainerAvatars = styled.div<ContainerProps>`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+`;
+
 export const ImgUser = styled.img<ContainerProps>`
-  width: 70px;
+  width: 50px;
   cursor: pointer;
   padding: 2px;
 `;

@@ -66,18 +66,9 @@ const Login = () => {
         ageValid,
         professionValid,
         sexValid,
-        avatarValid,
-        errors,
-        setErrors
+        avatarValid
       );
     }
-  }
-
-  function teste() {
-    // let teste = [...erros];
-    // teste.push("caraca meu");
-    // setErros(teste);
-    console.log(errors);
   }
 
   return (
@@ -138,7 +129,13 @@ const Login = () => {
           padding="10px"
         >
           <C.Label>Sexo:</C.Label>
-          <C.Container displayFlex alignItems="center">
+          <C.Container
+            displayFlex
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+            padding="0 5px"
+          >
             <C.Label htmlFor="masculino" margin="0px 10px 0 0">
               Masculino
             </C.Label>
@@ -164,139 +161,121 @@ const Login = () => {
           </C.Container>
         </C.Container>
 
-        <C.Container
-          displayFlex
-          column
-          width="100%"
-          justifyContent="space-between"
-        >
-          <C.Container
-            displayFlex
-            width="100%"
-            justifyContent="space-between"
-            margin="15px 0"
-          >
-            <C.ImgUser
-              src={user2}
-              alt="user2"
-              onClick={(e) =>
-                choseImgUser(
-                  e,
-                  setImgUserSelected,
-                  setImgUser1,
-                  setImgUser2,
-                  setImgUser3,
-                  setImgUser4,
-                  setImgUser5,
-                  setImgUser6,
-                  setavatarValid
-                )
-              }
-              style={{ border: imgUser2 ? "1px solid black" : "" }}
-            />
-            <C.ImgUser
-              src={user3}
-              alt="user3"
-              onClick={(e) =>
-                choseImgUser(
-                  e,
-                  setImgUserSelected,
-                  setImgUser1,
-                  setImgUser2,
-                  setImgUser3,
-                  setImgUser4,
-                  setImgUser5,
-                  setImgUser6,
-                  setavatarValid
-                )
-              }
-              style={{ border: imgUser3 ? "1px solid black" : "" }}
-            />
-            <C.ImgUser
-              src={user4}
-              alt="user4"
-              onClick={(e) =>
-                choseImgUser(
-                  e,
-                  setImgUserSelected,
-                  setImgUser1,
-                  setImgUser2,
-                  setImgUser3,
-                  setImgUser4,
-                  setImgUser5,
-                  setImgUser6,
-                  setavatarValid
-                )
-              }
-              style={{ border: imgUser4 ? "1px solid black" : "" }}
-            />
-          </C.Container>
+        <C.ContainerAvatars>
+          <C.ImgUser
+            src={user2}
+            alt="user2"
+            onClick={(e) =>
+              choseImgUser(
+                e,
+                setImgUserSelected,
+                setImgUser1,
+                setImgUser2,
+                setImgUser3,
+                setImgUser4,
+                setImgUser5,
+                setImgUser6,
+                setavatarValid
+              )
+            }
+            style={{ border: imgUser2 ? "1px solid black" : "" }}
+          />
+          <C.ImgUser
+            src={user3}
+            alt="user3"
+            onClick={(e) =>
+              choseImgUser(
+                e,
+                setImgUserSelected,
+                setImgUser1,
+                setImgUser2,
+                setImgUser3,
+                setImgUser4,
+                setImgUser5,
+                setImgUser6,
+                setavatarValid
+              )
+            }
+            style={{ border: imgUser3 ? "1px solid black" : "" }}
+          />
+          <C.ImgUser
+            src={user4}
+            alt="user4"
+            onClick={(e) =>
+              choseImgUser(
+                e,
+                setImgUserSelected,
+                setImgUser1,
+                setImgUser2,
+                setImgUser3,
+                setImgUser4,
+                setImgUser5,
+                setImgUser6,
+                setavatarValid
+              )
+            }
+            style={{ border: imgUser4 ? "1px solid black" : "" }}
+          />
 
-          <C.Container displayFlex width="100%" justifyContent="space-between">
-            <C.ImgUser
-              src={user1}
-              alt="user1"
-              onClick={(e) =>
-                choseImgUser(
-                  e,
-                  setImgUserSelected,
-                  setImgUser1,
-                  setImgUser2,
-                  setImgUser3,
-                  setImgUser4,
-                  setImgUser5,
-                  setImgUser6,
-                  setavatarValid
-                )
-              }
-              style={{ border: imgUser1 ? "1px solid black" : "" }}
-            />
-            <C.ImgUser
-              src={user5}
-              alt="user5"
-              onClick={(e) =>
-                choseImgUser(
-                  e,
-                  setImgUserSelected,
-                  setImgUser1,
-                  setImgUser2,
-                  setImgUser3,
-                  setImgUser4,
-                  setImgUser5,
-                  setImgUser6,
-                  setavatarValid
-                )
-              }
-              style={{ border: imgUser5 ? "1px solid black" : "" }}
-            />
-            <C.ImgUser
-              src={user6}
-              alt="user6"
-              onClick={(e) =>
-                choseImgUser(
-                  e,
-                  setImgUserSelected,
-                  setImgUser1,
-                  setImgUser2,
-                  setImgUser3,
-                  setImgUser4,
-                  setImgUser5,
-                  setImgUser6,
-                  setavatarValid
-                )
-              }
-              style={{ border: imgUser6 ? "1px solid black" : "" }}
-            />
-          </C.Container>
-        </C.Container>
+          <C.ImgUser
+            src={user1}
+            alt="user1"
+            onClick={(e) =>
+              choseImgUser(
+                e,
+                setImgUserSelected,
+                setImgUser1,
+                setImgUser2,
+                setImgUser3,
+                setImgUser4,
+                setImgUser5,
+                setImgUser6,
+                setavatarValid
+              )
+            }
+            style={{ border: imgUser1 ? "1px solid black" : "" }}
+          />
+          <C.ImgUser
+            src={user5}
+            alt="user5"
+            onClick={(e) =>
+              choseImgUser(
+                e,
+                setImgUserSelected,
+                setImgUser1,
+                setImgUser2,
+                setImgUser3,
+                setImgUser4,
+                setImgUser5,
+                setImgUser6,
+                setavatarValid
+              )
+            }
+            style={{ border: imgUser5 ? "1px solid black" : "" }}
+          />
+          <C.ImgUser
+            src={user6}
+            alt="user6"
+            onClick={(e) =>
+              choseImgUser(
+                e,
+                setImgUserSelected,
+                setImgUser1,
+                setImgUser2,
+                setImgUser3,
+                setImgUser4,
+                setImgUser5,
+                setImgUser6,
+                setavatarValid
+              )
+            }
+            style={{ border: imgUser6 ? "1px solid black" : "" }}
+          />
+        </C.ContainerAvatars>
 
         <C.ButtonSend onClick={logIn} type="button">
           Entrar
         </C.ButtonSend>
-
-        <button onClick={teste} type="button">
-          teste
-        </button>
       </C.ContainerModal>
     </C.MainContainerModal>
   );

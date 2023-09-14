@@ -95,9 +95,7 @@ export function addAllErrorsToAlert(
   ageValid: boolean,
   professionValid: boolean,
   sexValid: boolean,
-  avatarValid: boolean,
-  errors: any,
-  setErrors: any
+  avatarValid: boolean
 ) {
   let arrayErrors = [];
 
@@ -107,25 +105,24 @@ export function addAllErrorsToAlert(
   if (!ageValid) {
     arrayErrors.push("Idade");
   }
-
   if (!professionValid) {
     arrayErrors.push("Profissão");
   }
-
   if (!sexValid) {
-    arrayErrors.push("Sexo");
+    arrayErrors.push("Selecione o sexo");
   }
 
   if (!avatarValid) {
-    arrayErrors.push("Avatar");
+    arrayErrors.push("Selecione o seu avatar");
   }
 
   const str = arrayErrors.toString();
 
-  const newStr = str.replace(/,/g, " ");
+  const newStr = str.replace(/,/g, " | ");
 
-  console.log(str);
-  console.log(newStr);
+  alert(`Por favor, verifique os seguintes itens:
+    ${newStr}
+  `);
 }
 
 // Others
