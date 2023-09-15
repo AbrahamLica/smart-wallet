@@ -255,21 +255,17 @@ export function Add(
 export function choseImgUser(
   e: any,
   setImgUserSelected: any,
+  imageStates: any,
+  img: any,
   setImageStates: any,
   setAvatarValid: any
 ) {
-  const selectedImage = e.target.alt;
-  setImgUserSelected(e.target.src);
+  const updatedImageStates = { ...imageStates };
+  for (const user in updatedImageStates) {
+    updatedImageStates[user] = false;
+  }
+  setImageStates(updatedImageStates);
+  setImgUserSelected(e.target.alt);
   setAvatarValid(true);
-
-  // setImageStates((prevState: any) => {
-  //   const updatedImageStates = { ...prevState };
-  //   // Define todas as imagens para false
-  //   for (const key in updatedImageStates) {
-  //     updatedImageStates[key] = false;
-  //   }
-  //   // Define a imagem selecionada como true
-  //   updatedImageStates[selectedImage] = true;
-  //   return updatedImageStates;
-  // });
+  setImageStates({ ...updatedImageStates, [img]: true });
 }

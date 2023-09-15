@@ -8,15 +8,17 @@ import user5 from "../../img/user5.png";
 import user6 from "../../img/user6.png";
 import { useNavigate } from "react-router-dom";
 import * as C from "./LoginStyles";
-import { choseImgUser } from "../../Helpers/Helpers";
-import { changeSetName } from "../../Helpers/Helpers";
-import { changeSetAge } from "../../Helpers/Helpers";
-import { changeSetProfession } from "../../Helpers/Helpers";
-import { validateInputName } from "../../Helpers/Helpers";
-import { validateInputProfession } from "../../Helpers/Helpers";
-import { setGender } from "../../Helpers/Helpers";
-import { validateInputAge } from "../../Helpers/Helpers";
-import { addAllErrorsToAlert } from "../../Helpers/Helpers";
+import {
+  choseImgUser,
+  changeSetName,
+  changeSetAge,
+  changeSetProfession,
+  validateInputName,
+  validateInputProfession,
+  setGender,
+  validateInputAge,
+  addAllErrorsToAlert,
+} from "../../Helpers/Helpers";
 
 const Login = () => {
   const { state, dispatch } = useContext(Context);
@@ -25,12 +27,6 @@ const Login = () => {
   const [profession, setProfession] = useState<string>("");
   const [sex, setSex] = useState<string>("");
   const [imgUserSelected, setImgUserSelected] = useState<string>("");
-  // const [imgUser1, setImgUser1] = useState(false);
-  // const [imgUser2, setImgUser2] = useState(false);
-  // const [imgUser3, setImgUser3] = useState(false);
-  // const [imgUser4, setImgUser4] = useState(false);
-  // const [imgUser5, setImgUser5] = useState(false);
-  // const [imgUser6, setImgUser6] = useState(false);
   const [imageStates, setImageStates] = useState({
     user1: false,
     user2: false,
@@ -47,7 +43,6 @@ const Login = () => {
   const [ageValid, setAgeValid] = useState<boolean>(false);
   const [sexValid, setSexValid] = useState<boolean>(false);
   const [avatarValid, setAvatarValid] = useState<boolean>(false);
-  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -83,19 +78,50 @@ const Login = () => {
     choseImgUser(
       e,
       setImgUserSelected,
-      setImageStates({ ...imageStates, [img]: true }),
+      imageStates,
+      img,
+      setImageStates,
       setAvatarValid
     );
   }
 
+  type UserImagesProps = {
+    user1: string;
+    user2: string;
+    user3: string;
+    user4: string;
+    user5: string;
+    user6: string;
+  };
+
+  const users: string[] = [
+    "user1",
+    "user2",
+    "user3",
+    "user4",
+    "user5",
+    "user6",
+  ];
+
+  const userImages: UserImagesProps = {
+    user1,
+    user2,
+    user3,
+    user4,
+    user5,
+    user6,
+  };
+
   function teste() {
     console.log(imageStates);
+    console.log(imgUserSelected);
   }
 
   return (
     <C.MainContainerModal>
       <C.ContainerModal>
         <C.Text fontSize="1.6rem">Login</C.Text>
+
         <C.ContainerLabelInput>
           <C.InputText
             type="text"
@@ -183,50 +209,23 @@ const Login = () => {
         </C.Container>
 
         <C.ContainerAvatars>
-          <C.ImgUser
-            src={user2}
-            alt="user2"
-            onClick={(e) => handleImgUserClick(e, "user2")}
-            style={{ border: imageStates.user2 ? "1px solid black" : "" }}
-          />
-          <C.ImgUser
-            src={user3}
-            alt="user3"
-            onClick={(e) => handleImgUserClick(e, "user3")}
-            style={{ border: imageStates.user3 ? "1px solid black" : "" }}
-          />
-          <C.ImgUser
-            src={user4}
-            alt="user4"
-            onClick={(e) => handleImgUserClick(e, "user4")}
-            style={{ border: imageStates.user4 ? "1px solid black" : "" }}
-          />
-
-          <C.ImgUser
-            src={user1}
-            alt="user1"
-            onClick={(e) => handleImgUserClick(e, "user1")}
-            style={{ border: imageStates.user1 ? "1px solid black" : "" }}
-          />
-          <C.ImgUser
-            src={user5}
-            alt="user5"
-            onClick={(e) => handleImgUserClick(e, "user5")}
-            style={{ border: imageStates.user5 ? "1px solid black" : "" }}
-          />
-          <C.ImgUser
-            src={user6}
-            alt="user6"
-            onClick={(e) => handleImgUserClick(e, "user6")}
-            style={{ border: imageStates.user6 ? "1px solid black" : "" }}
-          />
+          {users.map((item) => (
+            <C.ImgUser
+              key={item}
+              src={userImages[item as keyof UserImagesProps]}
+              onClick={(e) => handleImgUserClick(e, item)}
+              style={{ border: imageStates[item] ? "1px solid black" : "" }}
+            />
+          ))}
         </C.ContainerAvatars>
 
         <C.ButtonSend onClick={logIn} type="button">
           Entrar
         </C.ButtonSend>
 
-        <button onClick={teste} type="button">teste</button>
+        <button onClick={teste} type="button">
+          teste
+        </button>
       </C.ContainerModal>
     </C.MainContainerModal>
   );
