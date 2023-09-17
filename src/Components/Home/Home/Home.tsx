@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState, useContext } from "react";
 import { Context } from "../../../Context/Context";
 import Header from "../../Header/Header/Header";
 import FinancialSummary from "../FinancialSummary";
-import FormInformations from "../FormInformations/FormInformations";
+import FormInformations from "../FormInformations";
 import Table from "../Table/index";
 
 function App() {
@@ -16,7 +16,11 @@ function App() {
       <Header></Header>
 
       <C.FormContainer>
-        <FinancialSummary></FinancialSummary>
+        <FinancialSummary
+          width="100%"
+          colorText="black"
+          border="1px solid black"
+        ></FinancialSummary>
 
         <FormInformations></FormInformations>
 

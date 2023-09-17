@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import close from "../../../img/close.svg";
 import * as C from "./styles";
+import * as G from "../../../Helpers/GeneralStyles";
 import { useContext } from "react";
 import { Context } from "../../../Context/Context";
 import { handleToggleMenu } from "../../../Helpers/Helpers";
-import Category from "../../Home/FinancialSummary/index";
+import FinancialSummary from "../../Home/FinancialSummary/index";
 import { calcularTudo } from "../../../Helpers/Helpers";
 
 const index = () => {
@@ -22,12 +23,16 @@ const index = () => {
       style={{ display: state.others.menuIsOpen ? "flex" : "none" }}
     >
       <C.ContainerIconClose>
-        <C.IconClose src={close} onClick={() => handleToggleMenu}></C.IconClose>
+        <C.IconClose
+          src={close}
+          onClick={() => handleToggleMenu(dispatch, state)}
+        ></C.IconClose>
       </C.ContainerIconClose>
 
       <C.ContainerInformationsUserHamburguer>
-        <img src={state.user.img} alt="Usuario" width={150} />
-        <C.Container margin="0 10px">
+
+        <C.ImgUser src={state.user.img} alt='usuario'></C.ImgUser>
+        <G.Container margin="0 10px">
           <C.InformationsUserHamburguer>
             {state.user.name}
           </C.InformationsUserHamburguer>
@@ -37,10 +42,14 @@ const index = () => {
           <C.InformationsUserHamburguer>
             {state.user.profession}
           </C.InformationsUserHamburguer>
-        </C.Container>
+        </G.Container>
       </C.ContainerInformationsUserHamburguer>
 
-      <Category></Category>
+      <FinancialSummary
+        colorText="white"
+        width="90%"
+        border="1px solid white"
+      ></FinancialSummary>
     </C.ContainerMenuHamburguer>
   );
 };

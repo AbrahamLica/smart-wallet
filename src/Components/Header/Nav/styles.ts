@@ -1,26 +1,5 @@
 import styled from "styled-components";
-
-export type ContainerProps = {
-  color?: string;
-  id?: any;
-  width?: string;
-  heigth?: string;
-  backgroundColor?: string;
-  displayFlex?: boolean;
-  flex?: string;
-  flexWrap?: boolean;
-  alignItems?: string;
-  margin?: string;
-  padding?: string;
-  column?: boolean;
-  border?: string;
-  borderRadius?: string;
-  cursorPointer?: boolean;
-  backgroundImage?: string;
-  backgroundPosition?: string;
-  backgroundSize?: string;
-  justifyContent?: string;
-};
+import { ContainerProps } from "../../../Types/typesStyles";
 
 export const ContainerNav = styled.nav<ContainerProps>`
   display: flex;

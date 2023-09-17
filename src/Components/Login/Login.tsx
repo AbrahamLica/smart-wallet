@@ -8,6 +8,7 @@ import user5 from "../../img/user5.png";
 import user6 from "../../img/user6.png";
 import { useNavigate } from "react-router-dom";
 import * as C from "./LoginStyles";
+import * as G from "../../Helpers/GeneralStyles";
 import {
   choseImgUser,
   changeSetName,
@@ -19,6 +20,7 @@ import {
   validateInputAge,
   addAllErrorsToAlert,
 } from "../../Helpers/Helpers";
+import { UserImagesProps } from "../../Types/types";
 
 const Login = () => {
   const { state, dispatch } = useContext(Context);
@@ -27,7 +29,7 @@ const Login = () => {
   const [profession, setProfession] = useState<string>("");
   const [sex, setSex] = useState<string>("");
   const [imgUserSelected, setImgUserSelected] = useState<string>("");
-  const [imageStates, setImageStates] = useState({
+  const [imageStates, setImageStates] = useState<any>({
     user1: false,
     user2: false,
     user3: false,
@@ -85,15 +87,6 @@ const Login = () => {
     );
   }
 
-  type UserImagesProps = {
-    user1: string;
-    user2: string;
-    user3: string;
-    user4: string;
-    user5: string;
-    user6: string;
-  };
-
   const users: string[] = [
     "user1",
     "user2",
@@ -104,23 +97,18 @@ const Login = () => {
   ];
 
   const userImages: UserImagesProps = {
-    user1,
-    user2,
-    user3,
-    user4,
-    user5,
-    user6,
+    user1: user1,
+    user2: user2,
+    user3: user3,
+    user4: user4,
+    user5: user5,
+    user6: user6,
   };
-
-  function teste() {
-    console.log(imageStates);
-    console.log(imgUserSelected);
-  }
 
   return (
     <C.MainContainerModal>
       <C.ContainerModal>
-        <C.Text fontSize="1.6rem">Login</C.Text>
+        <G.Text fontSize="1.6rem">Login</G.Text>
 
         <C.ContainerLabelInput>
           <C.InputText
@@ -131,7 +119,7 @@ const Login = () => {
             name="name"
           ></C.InputText>
           <C.Span>
-            <C.Text fontSize="0.8rem">{spanName}</C.Text>
+            <G.Text fontSize="0.8rem">{spanName}</G.Text>
           </C.Span>
         </C.ContainerLabelInput>
 
@@ -145,7 +133,7 @@ const Login = () => {
             name="number"
           ></C.InputNumber>
           <C.Span>
-            <C.Text fontSize="0.8rem">{spanAge}</C.Text>
+            <G.Text fontSize="0.8rem">{spanAge}</G.Text>
           </C.Span>
         </C.ContainerLabelInput>
 
@@ -164,11 +152,11 @@ const Login = () => {
             name="profession"
           ></C.InputText>
           <C.Span>
-            <C.Text fontSize="0.8rem">{spanProfession}</C.Text>
+            <G.Text fontSize="0.8rem">{spanProfession}</G.Text>
           </C.Span>
         </C.ContainerLabelInput>
 
-        <C.Container
+        <G.Container
           displayFlex
           column
           justifyContent="flex-start"
@@ -176,7 +164,7 @@ const Login = () => {
           padding="10px"
         >
           <C.Label>Sexo:</C.Label>
-          <C.Container
+          <G.Container
             displayFlex
             alignItems="center"
             justifyContent="center"
@@ -205,8 +193,8 @@ const Login = () => {
               onChange={(e) => setGender(e, setSex, setSexValid)}
               checked={sex == "female"}
             ></C.InputRadio>
-          </C.Container>
-        </C.Container>
+          </G.Container>
+        </G.Container>
 
         <C.ContainerAvatars>
           {users.map((item) => (
@@ -222,10 +210,6 @@ const Login = () => {
         <C.ButtonSend onClick={logIn} type="button">
           Entrar
         </C.ButtonSend>
-
-        <button onClick={teste} type="button">
-          teste
-        </button>
       </C.ContainerModal>
     </C.MainContainerModal>
   );

@@ -1,50 +1,9 @@
 import styled from "styled-components";
+import { ContainerProps } from "../../../Types/typesStyles";
+import { TextProps } from "../../../Types/typesStyles";
+import { InputProps } from "../../../Types/typesStyles";
 
 /////////////////// PROPS ///////////////////////
-
-export type ContainerProps = {
-  color?: string;
-  id?: any;
-  width?: string;
-  heigth?: string;
-  backgroundColor?: string;
-  displayFlex?: boolean;
-  flex?: string;
-  flexWrap?: boolean;
-  alignItems?: string;
-  margin?: string;
-  padding?: string;
-  column?: boolean;
-  border?: string;
-  borderRadius?: string;
-  cursorPointer?: boolean;
-  backgroundImage?: string;
-  backgroundPosition?: string;
-  backgroundSize?: string;
-  justifyContent?: string;
-};
-
-export type InputProps = {
-  color?: string;
-  bold?: boolean;
-  fontSize?: string;
-  width?: string;
-  backgroundColor?: string;
-  margin?: string;
-};
-
-export type TextProps = {
-  color?: string;
-  bold?: boolean;
-  fontSize?: string;
-  textAlign?: string;
-  margin?: string;
-  backgroundColor?: string;
-  padding?: string;
-  borderRadius?: string;
-  cursorPointer?: boolean;
-  zIndex?: boolean;
-};
 
 export const ContainerInformations = styled.div<ContainerProps>`
   display: flex;

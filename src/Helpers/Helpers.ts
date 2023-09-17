@@ -23,6 +23,31 @@ export function changeSetProfession(
   setProfession(e.target.value);
 }
 
+export function changeValueData(e: ChangeEvent<HTMLDataElement>, setData: any) {
+  setData(e.target.value);
+}
+
+export function changeValueCategoria(
+  e: ChangeEvent<HTMLSelectElement>,
+  setCategoria: any
+) {
+  setCategoria(e.target.value);
+}
+
+export function changeValueTitulo(
+  e: ChangeEvent<HTMLInputElement>,
+  setTitulo: any
+) {
+  setTitulo(e.target.value);
+}
+
+export function changeValueValor(
+  e: ChangeEvent<HTMLInputElement>,
+  setValor: any
+) {
+  setValor(e.target.valueAsNumber);
+}
+
 // validate inputs
 
 export function validateInputName(
@@ -161,66 +186,52 @@ export function calcularTudo(
   var totalReceitaFormatado = 0;
   var totalBalanco = 0;
 
+  // Calcula despesa
   for (let i = 0; i < state.data.length; i++) {
     if (state.data[i].despesa) {
-      totalDespesaFormatado += parseFloat(
-        state.data[i].despesa.slice(2).replace(".", "").replace(",", ".")
-      );
+      totalDespesaFormatado += state.data[i].despesa;
     }
   }
-  setDespesa(formatMoney(totalDespesaFormatado.toFixed(2)));
+  setDespesa(totalDespesaFormatado.toFixed(2));
 
+  // Calcula Receita
   for (let i = 0; i < state.data.length; i++) {
     if (state.data[i].receita) {
-      totalReceitaFormatado += parseFloat(
-        state.data[i].receita.slice(2).replace(".", "").replace(",", ".")
-      );
+      totalReceitaFormatado += state.data[i].receita;
     }
   }
-  setReceita(formatMoney(totalReceitaFormatado.toFixed(2)));
+  setReceita(totalReceitaFormatado.toFixed(2));
+
+  // Calcula Balanço
   totalBalanco = totalReceitaFormatado - totalDespesaFormatado;
 
-  if (totalBalanco < 0) {
-    setBalanco("-" + formatMoney(Math.abs(totalBalanco).toFixed(2)));
-  } else {
-    setBalanco(formatMoney(totalBalanco.toFixed(2)));
-  }
+  setBalanco(totalBalanco.toFixed(2));
+
 }
-
-export const formatMoney = (value: any) => {
-  if (typeof value !== "string") {
-    return "0,00";
-  }
-
-  const numericValue = value.replace(/[^0-9]/g, "");
-  const formattedValue = (parseFloat(numericValue) / 100).toLocaleString(
-    "pt-BR",
-    {
-      style: "currency",
-      currency: "BRL",
-      minimumFractionDigits: 2,
-    }
-  );
-
-  return formattedValue;
-};
 
 export function Add(
   data: any,
   categoria: any,
   titulo: any,
-  valor: any,
+  valor: number,
   setData: any,
   setValor: any,
   setTitulo: any,
   dispatch: any
 ) {
-  let day = data.slice(8, 10);
-  let month = data.slice(5, 7);
-  let year = data.slice(0, 4);
-  let dateFullFixed = `${day}/${month}/${year}`;
+  let day = 0;
+  let month = 0;
+  let year = 0;
+  let dateFullFixed = "";
 
-  if (data == 0 || categoria == "" || titulo == "" || valor == "0,00") {
+  if (data) {
+    day = data.slice(8, 10);
+    month = data.slice(5, 7);
+    year = data.slice(0, 4);
+    dateFullFixed = `${day}/${month}/${year}`;
+  }
+
+  if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
     alert("Por favor, preencha todos os dados antes de adicionar!");
   } else {
     if (categoria == "Despesa") {
@@ -247,7 +258,7 @@ export function Add(
       });
     }
     setData(0);
-    setValor("0,00");
+    setValor(0);
     setTitulo("");
   }
 }
@@ -265,7 +276,7 @@ export function choseImgUser(
     updatedImageStates[user] = false;
   }
   setImageStates(updatedImageStates);
-  setImgUserSelected(e.target.alt);
+  setImgUserSelected(e.target.src);
   setAvatarValid(true);
   setImageStates({ ...updatedImageStates, [img]: true });
 }

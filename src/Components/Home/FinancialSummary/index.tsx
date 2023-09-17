@@ -3,18 +3,28 @@ import * as C from "./styles";
 import { calcularTudo } from "../../../Helpers/Helpers";
 import { Context } from "../../../Context/Context";
 
-const index = () => {
+type MyComponentProps = {
+  colorText?: string;
+  width?: string;
+  border?: string;
+};
+
+const index: React.FC<MyComponentProps> = (props) => {
   const { state, dispatch } = useContext(Context);
-  const [balanco, setBalanco] = useState<any>(0);
-  const [despesa, setDespesa] = useState<any>(0);
-  const [receita, setReceita] = useState<any>(0);
+  const [balanco, setBalanco] = useState<number>(0);
+  const [despesa, setDespesa] = useState<number>(0);
+  const [receita, setReceita] = useState<number>(0);
 
   useEffect(() => {
-    calcularTudo(setDespesa, setDespesa, setBalanco, state);
-  }, []);
+    calcularTudo(setDespesa, setReceita, setBalanco, state);
+  }, [state.data]);
 
   return (
-    <C.ContainerFinancialSummary>
+    <C.ContainerFinancialSummary
+      color={props.colorText}
+      width={props.width}
+      border={props.border}
+    >
       <C.ContainerSingleInformation>
         <C.TitleInformation>Receita</C.TitleInformation>
         <C.Information>{receita}</C.Information>

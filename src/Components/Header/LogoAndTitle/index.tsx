@@ -1,12 +1,13 @@
 import * as C from "./styles";
-import wallet from "../../../img/wallet.png"
+import * as G from "../../../Helpers/GeneralStyles";
+import wallet from "../../../img/wallet.png";
 
 const index = () => {
   return (
-    <C.Container displayFlex alignItems="center">
+    <G.Container displayFlex alignItems="center">
       <C.Title>Smart Wallet</C.Title>
       <C.imgWallet src={wallet}></C.imgWallet>
-    </C.Container>
+    </G.Container>
   );
 };
 

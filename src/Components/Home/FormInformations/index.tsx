@@ -3,17 +3,20 @@ import * as C from "./styles";
 import { useEffect, useContext } from "react";
 import { Context } from "../../../Context/Context";
 import { Add } from "../../../Helpers/Helpers";
-import { formatMoney } from "../../../Helpers/Helpers";
+import { changeValueCategoria } from "../../../Helpers/Helpers";
+import { changeValueData } from "../../../Helpers/Helpers";
+import { changeValueTitulo } from "../../../Helpers/Helpers";
+import { changeValueValor } from "../../../Helpers/Helpers";
 
 const FormInformations = () => {
   const { state, dispatch } = useContext(Context);
   const [data, setData] = useState<any>(0);
   const [categoria, setCategoria] = useState<any>("Despesa");
   const [titulo, setTitulo] = useState("");
-  const [valor, setValor] = useState<string>("0,00");
+  const [valor, setValor] = useState<number>(0);
 
   useEffect(() => {
-    setValor("0,00");
+    setValor(0);
     setCategoria("Despesa");
     setTitulo("");
   }, [state.data, dispatch]);
@@ -24,20 +27,8 @@ const FormInformations = () => {
     { id: 3, name: "Salário" },
   ];
 
-  function changeValueData(e: ChangeEvent<HTMLDataElement>) {
-    setData(e.target.value);
-  }
-
-  function changeValueCategoria(e: ChangeEvent<HTMLSelectElement>) {
-    setCategoria(e.target.value);
-  }
-
-  function changeValueTitulo(e: ChangeEvent<HTMLInputElement>) {
-    setTitulo(e.target.value);
-  }
-
-  function changeValueValor(e: ChangeEvent<HTMLInputElement>) {
-    setValor(formatMoney(e.target.value));
+  function handleAdd() {
+    Add(data, categoria, titulo, valor, setData, setValor, setTitulo, dispatch);
   }
 
   return (
@@ -46,7 +37,7 @@ const FormInformations = () => {
         <C.TitleInformation>Data</C.TitleInformation>
         <C.Input
           type="date"
-          onChange={changeValueData}
+          onChange={(e) => changeValueData(e, setData)}
           value={data}
           name="date"
           autoComplete="on"
@@ -57,7 +48,7 @@ const FormInformations = () => {
         <C.TitleInformation>Categoria</C.TitleInformation>
         <C.Select
           value={categoria}
-          onChange={changeValueCategoria}
+          onChange={(e) => changeValueCategoria(e, setCategoria)}
           name="category"
         >
           {list.map((item, index) => (
@@ -72,7 +63,7 @@ const FormInformations = () => {
         <C.TitleInformation>Título</C.TitleInformation>
         <C.Input
           type="text"
-          onChange={changeValueTitulo}
+          onChange={(e) => changeValueTitulo(e, setTitulo)}
           value={titulo}
           name="title"
           autoComplete="on"
@@ -82,29 +73,15 @@ const FormInformations = () => {
       <C.ContainerSingleInformation>
         <C.TitleInformation>Valor</C.TitleInformation>
         <C.Input
-          type="string"
-          onChange={changeValueValor}
+          type="number"
+          onChange={(e) => changeValueValor(e, setValor)}
           value={valor}
           name="value"
           autoComplete="on"
         ></C.Input>
       </C.ContainerSingleInformation>
 
-      <C.ButtonAdd
-        onClick={() =>
-          Add(
-            data,
-            categoria,
-            titulo,
-            valor,
-            setData,
-            setValor,
-            setTitulo,
-            dispatch
-          )
-        }
-        type="button"
-      >
+      <C.ButtonAdd onClick={handleAdd} type="button">
         Adicionar
       </C.ButtonAdd>
     </C.ContainerInformations>
