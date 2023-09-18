@@ -72,7 +72,9 @@ export function reducerUser(state: UserType, action: ActionType) {
 //////////////////////////////////////////////////////////////////////
 
 export const reducerOthersInitialState: OthersType = {
-  menuIsOpen: false
+  menuIsOpen: false,
+  selectedManualMonth: '',
+  selectedManualYear: ''
 };
 
 export function reducerOthers(state: OthersType, action: ActionType) {
@@ -81,6 +83,14 @@ export function reducerOthers(state: OthersType, action: ActionType) {
       return {
         ...state,
         menuIsOpen: action.payload.menuIsOpen
+      };
+      break;
+
+      case "CHANGE_MANUAL_DATE":
+      return {
+        ...state,
+        selectedManualMonth: action.payload.selectedManualMonth,
+        selectedManualYear: action.payload.selectedManualYear,
       };
       break;
   }

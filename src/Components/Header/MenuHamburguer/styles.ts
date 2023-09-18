@@ -6,7 +6,7 @@ export const ContainerMenuHamburguer = styled.div<ContainerProps>`
   position: fixed;
   display: none;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   min-height: 100vh;

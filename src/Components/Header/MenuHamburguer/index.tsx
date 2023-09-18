@@ -29,26 +29,28 @@ const index = () => {
         ></C.IconClose>
       </C.ContainerIconClose>
 
-      <C.ContainerInformationsUserHamburguer>
-
-        <C.ImgUser src={state.user.img} alt='usuario'></C.ImgUser>
-        <G.Container margin="0 10px">
-          <C.InformationsUserHamburguer>
-            {state.user.name}
-          </C.InformationsUserHamburguer>
-          <C.InformationsUserHamburguer>
-            {state.user.age} anos
-          </C.InformationsUserHamburguer>
-          <C.InformationsUserHamburguer>
-            {state.user.profession}
-          </C.InformationsUserHamburguer>
-        </G.Container>
-      </C.ContainerInformationsUserHamburguer>
+      {state.user.img ? (
+        <C.ContainerInformationsUserHamburguer>
+          <C.ImgUser src={state.user.img} alt="usuario"></C.ImgUser>
+          <G.Container margin="0 10px">
+            <C.InformationsUserHamburguer>
+              {state.user.name}
+            </C.InformationsUserHamburguer>
+            <C.InformationsUserHamburguer>
+              {state.user.age} anos
+            </C.InformationsUserHamburguer>
+            <C.InformationsUserHamburguer>
+              {state.user.profession}
+            </C.InformationsUserHamburguer>
+          </G.Container>
+        </C.ContainerInformationsUserHamburguer>
+      ) : null}
 
       <FinancialSummary
         colorText="white"
         width="90%"
         border="1px solid white"
+        margin="40px 0px 0px 0px"
       ></FinancialSummary>
     </C.ContainerMenuHamburguer>
   );

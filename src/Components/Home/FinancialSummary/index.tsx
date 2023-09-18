@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import * as C from "./styles";
 import { calcularTudo } from "../../../Helpers/Helpers";
 import { Context } from "../../../Context/Context";
+import { formatarMoeda } from "../../../Helpers/Helpers";
 
 type MyComponentProps = {
   colorText?: string;
   width?: string;
   border?: string;
+  margin?: string;
 };
 
 const index: React.FC<MyComponentProps> = (props) => {
@@ -24,20 +26,21 @@ const index: React.FC<MyComponentProps> = (props) => {
       color={props.colorText}
       width={props.width}
       border={props.border}
+      margin={props.margin}
     >
       <C.ContainerSingleInformation>
         <C.TitleInformation>Receita</C.TitleInformation>
-        <C.Information>{receita}</C.Information>
+        <C.Information>{formatarMoeda(receita)}</C.Information>
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
         <C.TitleInformation>Despesa</C.TitleInformation>
-        <C.Information>{despesa}</C.Information>
+        <C.Information>{formatarMoeda(despesa)}</C.Information>
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
         <C.TitleInformation>Balanço</C.TitleInformation>
-        <C.Information>{balanco}</C.Information>
+        <C.Information>{formatarMoeda(balanco)}</C.Information>
       </C.ContainerSingleInformation>
     </C.ContainerFinancialSummary>
   );

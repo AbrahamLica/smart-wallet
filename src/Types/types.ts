@@ -17,6 +17,8 @@ export type UserType = {
 
 export type OthersType = {
   menuIsOpen: boolean
+  selectedManualMonth:any
+  selectedManualYear:any
 }
 
 export type ActionType = {

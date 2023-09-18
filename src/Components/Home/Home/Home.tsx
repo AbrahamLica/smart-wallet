@@ -5,6 +5,7 @@ import Header from "../../Header/Header/Header";
 import FinancialSummary from "../FinancialSummary";
 import FormInformations from "../FormInformations";
 import Table from "../Table/index";
+import CurrentDate from "../CurrentDate";
 
 function App() {
   const { state, dispatch } = useContext(Context);
@@ -16,6 +17,9 @@ function App() {
       <Header></Header>
 
       <C.FormContainer>
+
+        <CurrentDate></CurrentDate>
+
         <FinancialSummary
           width="100%"
           colorText="black"

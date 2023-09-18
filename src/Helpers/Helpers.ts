@@ -206,7 +206,6 @@ export function calcularTudo(
   totalBalanco = totalReceitaFormatado - totalDespesaFormatado;
 
   setBalanco(totalBalanco.toFixed(2));
-
 }
 
 export function Add(
@@ -279,4 +278,9 @@ export function choseImgUser(
   setImgUserSelected(e.target.src);
   setAvatarValid(true);
   setImageStates({ ...updatedImageStates, [img]: true });
+}
+
+export function formatarMoeda(valor: any) {
+  const valorFormatado = parseFloat(valor).toFixed(2);
+  return `R$ ${valorFormatado.replace(".", ",").replace(/(\d)(?=(\d{3})+\,)/g, "$1.")}`;
 }

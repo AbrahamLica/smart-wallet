@@ -12,6 +12,7 @@ export const ContainerFinancialSummary = styled.div<ContainerProps>`
   border-radius: 10px;
   padding: 10px;
   color: ${(props) => props.color};
+  margin: ${(props) => props.margin};
 `;
 
 export const ContainerSingleInformation = styled.div<ContainerProps>`
