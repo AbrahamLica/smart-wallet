@@ -73,8 +73,9 @@ export function reducerUser(state: UserType, action: ActionType) {
 
 export const reducerOthersInitialState: OthersType = {
   menuIsOpen: false,
-  selectedManualMonth: '',
-  selectedManualYear: ''
+  selectedManualMonth: "",
+  selectedManualYear: "",
+  completeDate: "",
 };
 
 export function reducerOthers(state: OthersType, action: ActionType) {
@@ -82,11 +83,11 @@ export function reducerOthers(state: OthersType, action: ActionType) {
     case "OPEN_MENU":
       return {
         ...state,
-        menuIsOpen: action.payload.menuIsOpen
+        menuIsOpen: action.payload.menuIsOpen,
       };
       break;
 
-      case "CHANGE_MANUAL_DATE":
+    case "CHANGE_MANUAL_DATE":
       return {
         ...state,
         selectedManualMonth: action.payload.selectedManualMonth,
@@ -103,7 +104,7 @@ export function reducerOthers(state: OthersType, action: ActionType) {
 const ContextInitialState = {
   data: reducerDataInitialState,
   user: reducerUserInitialState,
-  others: reducerOthersInitialState
+  others: reducerOthersInitialState,
 };
 
 export const Context = createContext<ContextType>({

@@ -22,12 +22,10 @@ const index = () => {
     const date = new Date();
 
     //define o mês atual
-    setCurrentMonth(date.getMonth() + 1); //+1 pq começa de 0 os meses
+    setCurrentMonth(date.getMonth() + 1);
 
     //define o ano atual
     setCurrentYear(date.getFullYear());
-
-    // setCurrentDate(currentDate);
 
     dispatch({
       type: "CHANGE_MANUAL_DATE",
@@ -42,40 +40,39 @@ const index = () => {
 
   function changeManualDate(e: any) {
     let newMonth = state.others.selectedManualMonth;
-  let newYear = state.others.selectedManualYear;
+    let newYear = state.others.selectedManualYear;
 
-  if (e.target.alt === "left") {
-    // Decrementa o mês
-    newMonth--;
+    if (e.target.alt === "left") {
+      newMonth--;
+      // Se o mês for menor que 1, retrocede um ano e define o mês para dezembro
+      if (newMonth < 1) {
+        newMonth = 12;
+        newYear--;
+      }
+    } else {
+      // Incrementa o mês
+      newMonth++;
 
-    // Se o mês for menor que 1, retrocede um ano e define o mês para dezembro
-    if (newMonth < 1) {
-      newMonth = 12;
-      newYear--;
+      // Se o mês for maior que 12, avança um ano e define o mês para janeiro
+      if (newMonth > 12) {
+        newMonth = 1;
+        newYear++;
+      }
     }
-  } else {
-    // Incrementa o mês
-    newMonth++;
 
-    // Se o mês for maior que 12, avança um ano e define o mês para janeiro
-    if (newMonth > 12) {
-      newMonth = 1;
-      newYear++;
-    }
-  }
-
-  dispatch({
-    type: "CHANGE_MANUAL_DATE",
-    payload: {
-      selectedManualMonth: newMonth,
-      selectedManualYear: newYear,
-    },
-  });
+    dispatch({
+      type: "CHANGE_MANUAL_DATE",
+      payload: {
+        selectedManualMonth: newMonth,
+        selectedManualYear: newYear,
+      },
+    });
   }
 
   function teste() {
     showCurrentDate();
     console.log(state.others);
+    console.log(state.data)
   }
 
   return (

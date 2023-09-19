@@ -24,7 +24,9 @@ export function changeSetProfession(
 }
 
 export function changeValueData(e: ChangeEvent<HTMLDataElement>, setData: any) {
-  setData(e.target.value);
+  // setData(Date.parse(e.target.value));
+  setData(e.target.value)
+  
 }
 
 export function changeValueCategoria(
@@ -209,6 +211,7 @@ export function calcularTudo(
 }
 
 export function Add(
+  monthYearDate:any,
   data: any,
   categoria: any,
   titulo: any,
@@ -218,17 +221,17 @@ export function Add(
   setTitulo: any,
   dispatch: any
 ) {
-  let day = 0;
-  let month = 0;
-  let year = 0;
-  let dateFullFixed = "";
+  // let day = 0;
+  // let month = 0;
+  // let year = 0;
+  // let dateFullFixed = "";
 
-  if (data) {
-    day = data.slice(8, 10);
-    month = data.slice(5, 7);
-    year = data.slice(0, 4);
-    dateFullFixed = `${day}/${month}/${year}`;
-  }
+  // if (data) {
+  //   day = data.slice(8, 10);
+  //   month = data.slice(5, 7);
+  //   year = data.slice(0, 4);
+  //   dateFullFixed = `${day}/${month}/${year}`;
+  // }
 
   if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
     alert("Por favor, preencha todos os dados antes de adicionar!");
@@ -237,7 +240,7 @@ export function Add(
       dispatch({
         type: "CADASTRAR_DESPESA",
         payload: {
-          data: dateFullFixed,
+          data: data,
           categoria: categoria,
           titulo: titulo,
           valor: valor,
@@ -248,7 +251,7 @@ export function Add(
       dispatch({
         type: "CADASTRAR_RECEITA",
         payload: {
-          data: dateFullFixed,
+          data: data,
           categoria: categoria,
           titulo: titulo,
           valor: valor,
