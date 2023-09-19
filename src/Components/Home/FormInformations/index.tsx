@@ -28,17 +28,7 @@ const FormInformations = () => {
   ];
 
   function handleAdd() {
-    Add(
-      state.others.completeDate,
-      data,
-      categoria,
-      titulo,
-      valor,
-      setData,
-      setValor,
-      setTitulo,
-      dispatch
-    );
+    Add(data, categoria, titulo, valor, setData, setValor, setTitulo, dispatch);
   }
 
   return (

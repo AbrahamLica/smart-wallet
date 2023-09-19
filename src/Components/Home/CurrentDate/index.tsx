@@ -14,17 +14,23 @@ const index = () => {
   const [currentYear, setCurrentYear] = useState(0);
 
   useEffect(() => {
-    showCurrentDate();
+    // showCurrentDate();
+    const date = new Date();
+    setCurrentMonth(date.getMonth() + 1);
+    setCurrentYear(date.getFullYear());
+
+    dispatch({
+      type: "CHANGE_MANUAL_DATE",
+      payload: {
+        selectedManualMonth: currentMonth,
+        selectedManualYear: currentYear,
+      },
+    });
   }, []);
 
   function showCurrentDate() {
-    //cria a data inicial
     const date = new Date();
-
-    //define o mês atual
     setCurrentMonth(date.getMonth() + 1);
-
-    //define o ano atual
     setCurrentYear(date.getFullYear());
 
     dispatch({
@@ -36,24 +42,18 @@ const index = () => {
     });
   }
 
-  function convertMonthAndYearToName() {}
-
   function changeManualDate(e: any) {
     let newMonth = state.others.selectedManualMonth;
     let newYear = state.others.selectedManualYear;
 
     if (e.target.alt === "left") {
       newMonth--;
-      // Se o mês for menor que 1, retrocede um ano e define o mês para dezembro
       if (newMonth < 1) {
         newMonth = 12;
         newYear--;
       }
     } else {
-      // Incrementa o mês
       newMonth++;
-
-      // Se o mês for maior que 12, avança um ano e define o mês para janeiro
       if (newMonth > 12) {
         newMonth = 1;
         newYear++;
@@ -72,7 +72,7 @@ const index = () => {
   function teste() {
     showCurrentDate();
     console.log(state.others);
-    console.log(state.data)
+    console.log(state.data);
   }
 
   return (

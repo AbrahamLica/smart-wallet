@@ -25,8 +25,7 @@ export function changeSetProfession(
 
 export function changeValueData(e: ChangeEvent<HTMLDataElement>, setData: any) {
   // setData(Date.parse(e.target.value));
-  setData(e.target.value)
-  
+  setData(e.target.value);
 }
 
 export function changeValueCategoria(
@@ -211,7 +210,6 @@ export function calcularTudo(
 }
 
 export function Add(
-  monthYearDate:any,
   data: any,
   categoria: any,
   titulo: any,
@@ -221,18 +219,6 @@ export function Add(
   setTitulo: any,
   dispatch: any
 ) {
-  // let day = 0;
-  // let month = 0;
-  // let year = 0;
-  // let dateFullFixed = "";
-
-  // if (data) {
-  //   day = data.slice(8, 10);
-  //   month = data.slice(5, 7);
-  //   year = data.slice(0, 4);
-  //   dateFullFixed = `${day}/${month}/${year}`;
-  // }
-
   if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
     alert("Por favor, preencha todos os dados antes de adicionar!");
   } else {
@@ -285,5 +271,15 @@ export function choseImgUser(
 
 export function formatarMoeda(valor: any) {
   const valorFormatado = parseFloat(valor).toFixed(2);
-  return `R$ ${valorFormatado.replace(".", ",").replace(/(\d)(?=(\d{3})+\,)/g, "$1.")}`;
+  return `R$ ${valorFormatado
+    .replace(".", ",")
+    .replace(/(\d)(?=(\d{3})+\,)/g, "$1.")}`;
 }
+
+export const formatarData = (data: any) => {
+  const dataObj = new Date(data);
+  const dia = String(dataObj.getDate() + 1).padStart(2, "0");
+  const mes = String(dataObj.getMonth() + 1).padStart(2, "0"); // Os meses são zero indexados
+  const ano = dataObj.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+};

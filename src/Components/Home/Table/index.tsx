@@ -1,10 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as C from "./styles";
 import { Context } from "../../../Context/Context";
 import { formatarMoeda } from "../../../Helpers/Helpers";
+import { formatarData } from "../../../Helpers/Helpers";
 
 const index = () => {
   const { state, dispatch } = useContext(Context);
+  const [formatedDate, setFormatedDate] = useState();
+
+  useEffect(() => {}, []);
+
+  const filteredItems = state.data.filter((item) => {
+    const itemDate = new Date(item.data);
+    const itemMonth = itemDate.getMonth() + 1;
+    return itemMonth === state.others.selectedManualMonth;
+  });
+
+  function teste() {}
 
   return (
     <C.ContainerTable>
@@ -17,10 +29,10 @@ const index = () => {
             <C.Th>Valor</C.Th>
           </tr>
         </thead>
-        {state.data.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <tbody key={index}>
             <tr>
-              <C.Td>{item.data}</C.Td>
+              <C.Td>{formatarData(item.data)}</C.Td>
               <C.Td>{item.categoria}</C.Td>
               <C.Td>{item.titulo}</C.Td>
               <C.Td>{formatarMoeda(item.valor)}</C.Td>
