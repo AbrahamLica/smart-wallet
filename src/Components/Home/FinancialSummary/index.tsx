@@ -19,7 +19,7 @@ const index: React.FC<MyComponentProps> = (props) => {
 
   useEffect(() => {
     calcularTudo(setDespesa, setReceita, setBalanco, state);
-  }, [state.data]);
+  }, [state.data, state.others.selectedManualMonth]);
 
   return (
     <C.ContainerFinancialSummary

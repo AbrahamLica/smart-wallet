@@ -8,25 +8,14 @@ import imgRight from "../../../img/img-right.png";
 
 const index = () => {
   const { state, dispatch } = useContext(Context);
-
   const [currentDate, setCurrentDate] = useState<any>("");
   const [currentMonth, setCurrentMonth] = useState(0);
   const [currentYear, setCurrentYear] = useState(0);
 
   useEffect(() => {
-    // showCurrentDate();
-    const date = new Date();
-    setCurrentMonth(date.getMonth() + 1);
-    setCurrentYear(date.getFullYear());
-
-    dispatch({
-      type: "CHANGE_MANUAL_DATE",
-      payload: {
-        selectedManualMonth: currentMonth,
-        selectedManualYear: currentYear,
-      },
-    });
-  }, []);
+    showCurrentDate();
+    console.log(state.others.selectedManualMonth);
+  }, [currentMonth, currentYear]);
 
   function showCurrentDate() {
     const date = new Date();
@@ -69,12 +58,6 @@ const index = () => {
     });
   }
 
-  function teste() {
-    showCurrentDate();
-    console.log(state.others);
-    console.log(state.data);
-  }
-
   return (
     <G.Container width="100%">
       <C.ContainerCurrentDate>
@@ -85,7 +68,14 @@ const index = () => {
             onClick={changeManualDate}
           ></C.ImgArrow>
         </G.Container>
-        <G.Text>{`${state.others.selectedManualMonth} / ${state.others.selectedManualYear}`}</G.Text>
+
+        <G.Text>
+          {state.others.selectedManualMonth < 10
+            ? `0${state.others.selectedManualMonth}`
+            : state.others.selectedManualMonth}
+          /{state.others.selectedManualYear}
+        </G.Text>
+
         <G.Container>
           <C.ImgArrow
             src={imgRight}
@@ -93,9 +83,6 @@ const index = () => {
             onClick={changeManualDate}
           ></C.ImgArrow>
         </G.Container>
-        <button type="button" onClick={teste}>
-          teste
-        </button>
       </C.ContainerCurrentDate>
     </G.Container>
   );

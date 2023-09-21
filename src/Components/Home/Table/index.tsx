@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as C from "./styles";
+import * as G from "../../../Helpers/GeneralStyles";
 import { Context } from "../../../Context/Context";
 import { formatarMoeda } from "../../../Helpers/Helpers";
 import { formatarData } from "../../../Helpers/Helpers";
@@ -13,10 +14,12 @@ const index = () => {
   const filteredItems = state.data.filter((item) => {
     const itemDate = new Date(item.data);
     const itemMonth = itemDate.getMonth() + 1;
-    return itemMonth === state.others.selectedManualMonth;
+    const itemYear = itemDate.getFullYear();
+    return (
+      itemMonth === state.others.selectedManualMonth &&
+      itemYear === state.others.selectedManualYear
+    );
   });
-
-  function teste() {}
 
   return (
     <C.ContainerTable>
@@ -36,6 +39,7 @@ const index = () => {
               <C.Td>{item.categoria}</C.Td>
               <C.Td>{item.titulo}</C.Td>
               <C.Td>{formatarMoeda(item.valor)}</C.Td>
+              <C.ImgDelete></C.ImgDelete>
             </tr>
           </tbody>
         ))}

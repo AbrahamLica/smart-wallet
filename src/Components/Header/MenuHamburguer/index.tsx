@@ -46,11 +46,17 @@ const index = () => {
         </C.ContainerInformationsUserHamburguer>
       ) : null}
 
+      <G.Text color="white" fontSize="1.6rem">
+        {state.others.selectedManualMonth < 10
+          ? `0${state.others.selectedManualMonth}`
+          : state.others.selectedManualMonth}
+        /{state.others.selectedManualYear}
+      </G.Text>
+
       <FinancialSummary
         colorText="white"
         width="90%"
         border="1px solid white"
-        margin="40px 0px 0px 0px"
       ></FinancialSummary>
     </C.ContainerMenuHamburguer>
   );

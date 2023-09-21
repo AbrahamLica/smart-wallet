@@ -7,6 +7,7 @@ export const ContainerTable = styled.div<ContainerProps>`
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
+  /* display: flex; */
 
   @media (max-width: 600px) {
     overflow-x: auto;
@@ -21,14 +22,15 @@ export const Th = styled.th<ContainerProps>`
   text-align: left;
   width: 35%;
   padding: 10px;
-  /* background-color: red; */
 `;
 
 export const Td = styled.th<ContainerProps>`
   text-align: left;
   padding: 10px;
-  min-width: 200px;
   width: auto;
   white-space: nowrap;
 `;
 
+export const ImgDelete = styled.img<ContainerProps>`
+  
+`;

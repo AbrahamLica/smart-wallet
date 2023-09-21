@@ -187,18 +187,28 @@ export function calcularTudo(
   var totalReceitaFormatado = 0;
   var totalBalanco = 0;
 
+  const filteredItems = state.data.filter((item: any) => {
+    const itemDate = new Date(item.data);
+    const itemMonth = itemDate.getMonth() + 1;
+    const itemYear = itemDate.getFullYear();
+    return (
+      itemMonth === state.others.selectedManualMonth &&
+      itemYear === state.others.selectedManualYear
+    );
+  });
+
   // Calcula despesa
-  for (let i = 0; i < state.data.length; i++) {
-    if (state.data[i].despesa) {
-      totalDespesaFormatado += state.data[i].despesa;
+  for (let i = 0; i < filteredItems.length; i++) {
+    if (filteredItems[i].despesa) {
+      totalDespesaFormatado += filteredItems[i].despesa;
     }
   }
   setDespesa(totalDespesaFormatado.toFixed(2));
 
   // Calcula Receita
-  for (let i = 0; i < state.data.length; i++) {
-    if (state.data[i].receita) {
-      totalReceitaFormatado += state.data[i].receita;
+  for (let i = 0; i < filteredItems.length; i++) {
+    if (filteredItems[i].receita) {
+      totalReceitaFormatado += filteredItems[i].receita;
     }
   }
   setReceita(totalReceitaFormatado.toFixed(2));

@@ -21,7 +21,6 @@ export const ContainerLogoTitle = styled.div<ContainerProps>`
   justify-content: center;
   width: 100%;
   grid-area: A2;
-  /* background-color: red; */
 
   @media (max-width: 780px) {
     flex-direction: column;
@@ -32,6 +31,7 @@ export const imgMenuHamburguer = styled.img<ContainerProps>`
   display: none;
   width: 25px;
   cursor: pointer;
+  margin: 5px;
 
   @media (max-width: 780px) {
     display: block;
