@@ -32,5 +32,6 @@ export const Td = styled.th<ContainerProps>`
 `;
 
 export const ImgDelete = styled.img<ContainerProps>`
-  
+  width: 35px;
+  cursor: pointer;
 `;

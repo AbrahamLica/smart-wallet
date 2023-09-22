@@ -151,6 +151,65 @@ export function addAllErrorsToAlert(
   `);
 }
 
+// CRUD Functions
+
+export function Add(
+  data: any,
+  categoria: any,
+  titulo: any,
+  valor: number,
+  setData: any,
+  setValor: any,
+  setTitulo: any,
+  dispatch: any
+) {
+  var id = Math.random();
+
+  if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
+    alert("Por favor, preencha todos os dados antes de adicionar!");
+  } else {
+    if (categoria == "Despesa") {
+      dispatch({
+        type: "CADASTRAR_DESPESA",
+        payload: {
+          id: id,
+          data: data,
+          categoria: categoria,
+          titulo: titulo,
+          valor: valor,
+          despesa: valor,
+        },
+      });
+    } else if (categoria == "Salário" || categoria == "Extra") {
+      dispatch({
+        type: "CADASTRAR_RECEITA",
+        payload: {
+          id: id,
+          data: data,
+          categoria: categoria,
+          titulo: titulo,
+          valor: valor,
+          receita: valor,
+        },
+      });
+    }
+    setData(0);
+    setValor(0);
+    setTitulo("");
+  }
+}
+
+export function deleteItem(dispatch: any, id:any) {
+  if (window.confirm("Tem certeza que deseja excluir este item?")) {
+    dispatch({
+      type: "DELETE_ITEM",
+      payload: {
+        id: id
+      },
+    });
+  }
+}
+
 // Others
 
 export function containsSpecialChars(str: string) {
@@ -217,48 +276,6 @@ export function calcularTudo(
   totalBalanco = totalReceitaFormatado - totalDespesaFormatado;
 
   setBalanco(totalBalanco.toFixed(2));
-}
-
-export function Add(
-  data: any,
-  categoria: any,
-  titulo: any,
-  valor: number,
-  setData: any,
-  setValor: any,
-  setTitulo: any,
-  dispatch: any
-) {
-  if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
-    alert("Por favor, preencha todos os dados antes de adicionar!");
-  } else {
-    if (categoria == "Despesa") {
-      dispatch({
-        type: "CADASTRAR_DESPESA",
-        payload: {
-          data: data,
-          categoria: categoria,
-          titulo: titulo,
-          valor: valor,
-          despesa: valor,
-        },
-      });
-    } else if (categoria == "Salário" || categoria == "Extra") {
-      dispatch({
-        type: "CADASTRAR_RECEITA",
-        payload: {
-          data: data,
-          categoria: categoria,
-          titulo: titulo,
-          valor: valor,
-          receita: valor,
-        },
-      });
-    }
-    setData(0);
-    setValor(0);
-    setTitulo("");
-  }
 }
 
 export function choseImgUser(

@@ -17,6 +17,7 @@ export function reducerData(state: DataType[], action: ActionType) {
       let newState = [...state];
       newState.push({
         ...state,
+        id: action.payload?.id,
         data: action.payload?.data,
         categoria: action.payload?.categoria,
         titulo: action.payload?.titulo,
@@ -29,6 +30,7 @@ export function reducerData(state: DataType[], action: ActionType) {
     case "CADASTRAR_RECEITA":
       let newStatee = [...state];
       newStatee.push({
+        id: action.payload?.id,
         data: action.payload?.data,
         categoria: action.payload?.categoria,
         titulo: action.payload?.titulo,
@@ -36,6 +38,21 @@ export function reducerData(state: DataType[], action: ActionType) {
         receita: action.payload.receita,
       });
       return newStatee;
+      break;
+
+    case "DELETE_ITEM":
+      let clonedArray = [...state];
+      let filteredArray = clonedArray.filter(
+        (item) => item.id !== action.payload?.id
+      );
+      return filteredArray;
+      break;
+
+    case "EDIT":
+      let newStateeee = [...state];
+      newStateeee[action.payload.pos].name = action.payload.name;
+      newStateeee[action.payload.pos].email = action.payload.email;
+      return newStateeee;
       break;
   }
 

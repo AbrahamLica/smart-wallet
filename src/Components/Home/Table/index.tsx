@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import * as C from "./styles";
 import * as G from "../../../Helpers/GeneralStyles";
 import { Context } from "../../../Context/Context";
-import { formatarMoeda } from "../../../Helpers/Helpers";
+import { deleteItem, formatarMoeda } from "../../../Helpers/Helpers";
 import { formatarData } from "../../../Helpers/Helpers";
+import trash from "../../../img/trash.png";
 
 const index = () => {
   const { state, dispatch } = useContext(Context);
@@ -39,7 +40,10 @@ const index = () => {
               <C.Td>{item.categoria}</C.Td>
               <C.Td>{item.titulo}</C.Td>
               <C.Td>{formatarMoeda(item.valor)}</C.Td>
-              <C.ImgDelete></C.ImgDelete>
+              <C.ImgDelete
+                src={trash}
+                onClick={() => deleteItem(dispatch, item.id)}
+              ></C.ImgDelete>
             </tr>
           </tbody>
         ))}

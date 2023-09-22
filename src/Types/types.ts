@@ -1,4 +1,5 @@
 export type DataType = {
+  id?:any;
   data?: any;
   categoria?: string;
   titulo?: string;

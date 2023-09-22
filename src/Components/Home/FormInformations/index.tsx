@@ -27,6 +27,7 @@ const FormInformations = () => {
     { id: 3, name: "Salário" },
   ];
 
+console.log(state.data)
   function handleAdd() {
     Add(data, categoria, titulo, valor, setData, setValor, setTitulo, dispatch);
   }
