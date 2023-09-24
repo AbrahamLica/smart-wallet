@@ -42,7 +42,7 @@ export const TitleInformation = styled.p<TextProps>`
 export const Input = styled.input<InputProps>`
   width: 150px;
   height: 40px;
-  background-color: #05060f0a;
+  background-color: RGBA(0, 0, 0, 0.15);
   border-radius: 0.5rem;
   padding: 0 1rem;
   border: 2px solid transparent;
@@ -50,15 +50,13 @@ export const Input = styled.input<InputProps>`
   transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+  font-weight: bold;
+  color: black;
 
   :hover,
   :focus {
     outline: none;
     border-color: #05060f;
-  }
-
-  :focus {
-    color: #05060fc2;
   }
 
   @media (max-width: 900px) {
@@ -67,9 +65,9 @@ export const Input = styled.input<InputProps>`
 `;
 
 export const Select = styled.select<TextProps>`
-   width: 150px;
+  width: 150px;
   height: 40px;
-  background-color: #05060f0a;
+  background-color: RGBA(0, 0, 0, 0.15);
   border-radius: 0.5rem;
   padding: 0 1rem;
   border: 2px solid transparent;
@@ -77,6 +75,8 @@ export const Select = styled.select<TextProps>`
   transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+  color: black;
+  font-weight: bold;
 
   :hover,
   :focus {
@@ -84,12 +84,8 @@ export const Select = styled.select<TextProps>`
     border-color: #05060f;
   }
 
-  :focus {
-    color: #05060fc2;
-  }
-
   @media (max-width: 900px) {
-    width: 200px;
+    width: 230px;
   }
 `;
 

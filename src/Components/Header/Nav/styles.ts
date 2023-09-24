@@ -13,6 +13,11 @@ export const ContainerNav = styled.nav<ContainerProps>`
     margin-left: 10px;
     margin-right: 10px;
     cursor: pointer;
+    transition: 0.3s;
+
+    :hover {
+      transform: scale(1.1);
+    }
   }
 
   @media (max-width: 780px) {
