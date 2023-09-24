@@ -40,8 +40,26 @@ export const TitleInformation = styled.p<TextProps>`
 `;
 
 export const Input = styled.input<InputProps>`
-  height: 30px;
   width: 150px;
+  height: 40px;
+  background-color: #05060f0a;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+
+  :hover,
+  :focus {
+    outline: none;
+    border-color: #05060f;
+  }
+
+  :focus {
+    color: #05060fc2;
+  }
 
   @media (max-width: 900px) {
     width: 200px;
@@ -49,8 +67,26 @@ export const Input = styled.input<InputProps>`
 `;
 
 export const Select = styled.select<TextProps>`
-  height: 35px;
-  width: 150px;
+   width: 150px;
+  height: 40px;
+  background-color: #05060f0a;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+
+  :hover,
+  :focus {
+    outline: none;
+    border-color: #05060f;
+  }
+
+  :focus {
+    color: #05060fc2;
+  }
 
   @media (max-width: 900px) {
     width: 200px;
