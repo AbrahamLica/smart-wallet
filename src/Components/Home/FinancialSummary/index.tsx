@@ -1,24 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import * as C from "./styles";
-import { calcularTudo } from "../../../Helpers/Helpers";
+import * as G from "../../../Helpers/GeneralStyles";
+import { calculateEverything } from "../../../Helpers/Helpers";
 import { Context } from "../../../Context/Context";
-import { formatarMoeda } from "../../../Helpers/Helpers";
+import { formatCurrency } from "../../../Helpers/Helpers";
+import { FinancialSummaryProps } from "../../../Types/types";
+import incomeIcon from "../../../img/income.png";
+import expenseIcon from "../../../img/expense.png";
+import balanceIcon from "../../../img/balance.png";
 
-type MyComponentProps = {
-  colorText?: string;
-  width?: string;
-  border?: string;
-  margin?: string;
-};
-
-const index: React.FC<MyComponentProps> = (props) => {
+const index: React.FC<FinancialSummaryProps> = (props) => {
   const { state, dispatch } = useContext(Context);
-  const [balanco, setBalanco] = useState<number>(0);
-  const [despesa, setDespesa] = useState<number>(0);
-  const [receita, setReceita] = useState<number>(0);
+  const [balance, setBalance] = useState<number>(0);
+  const [expense, setExpense] = useState<number>(0);
+  const [income, setIncome] = useState<number>(0);
 
   useEffect(() => {
-    calcularTudo(setDespesa, setReceita, setBalanco, state);
+    calculateEverything(setExpense, setIncome, setBalance, state);
   }, [state.data, state.others.selectedManualMonth]);
 
   return (
@@ -29,18 +27,39 @@ const index: React.FC<MyComponentProps> = (props) => {
       margin={props.margin}
     >
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Receita</C.TitleInformation>
-        <C.Information>{formatarMoeda(receita)}</C.Information>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Receita</C.TitleInformation>
+          <img src={incomeIcon} width={45} alt="income" />
+        </G.Container>
+        <C.Information>{formatCurrency(income)}</C.Information>
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Despesa</C.TitleInformation>
-        <C.Information>{formatarMoeda(despesa)}</C.Information>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Despesa</C.TitleInformation>
+          <img src={expenseIcon} width={45} alt="income" />
+        </G.Container>
+        <C.Information>{formatCurrency(expense)}</C.Information>
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Balanço</C.TitleInformation>
-        <C.Information>{formatarMoeda(balanco)}</C.Information>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Balanço</C.TitleInformation>
+          <img src={balanceIcon} alt="balanceIcon" width={40} />
+        </G.Container>
+        {balance > 0 ? (
+          <C.Information style={{ color: "green" }}>
+            {formatCurrency(balance)}
+          </C.Information>
+        ) : balance < 0 ? (
+          <C.Information style={{ color: "red" }}>
+            {formatCurrency(balance)}
+          </C.Information>
+        ) : (
+          <C.Information style={{ color: "black" }}>
+            {formatCurrency(balance)}
+          </C.Information>
+        )}
       </C.ContainerSingleInformation>
     </C.ContainerFinancialSummary>
   );

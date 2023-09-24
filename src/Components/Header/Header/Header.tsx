@@ -4,9 +4,9 @@ import InformationsUser from "../InformationsUser";
 import MenuHamburguer from "../MenuHamburguer";
 import LogoAndTitle from "../LogoAndTitle";
 import Nav from "../Nav";
-import * as C from "./styles";
 import { Context } from "../../../Context/Context";
 import { useContext } from "react";
+import * as C from "./styles";
 
 const Header = () => {
   const { state, dispatch } = useContext(Context);

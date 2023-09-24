@@ -2,9 +2,15 @@ import * as C from "./styles";
 import * as G from "../../../Helpers/GeneralStyles";
 import { useContext } from "react";
 import { Context } from "../../../Context/Context";
+import { useNavigate } from "react-router-dom";
 
 const index = () => {
   const { state, dispatch } = useContext(Context);
+  const navigate = useNavigate();
+
+  function goToLoginPage() {
+    navigate("/");
+  }
 
   return (
     <C.ContainerInformationsUser>
@@ -17,7 +23,17 @@ const index = () => {
             <G.Text color="white">{state.user.profession}</G.Text>
           </G.Container>
         </>
-      ) : null}
+      ) : (
+        <G.Container margin="0 10px">
+          <G.Text textAlign="center" color="white">
+            Você não está logado. <br />
+            Efetuar{" "}
+            <G.Link onClick={goToLoginPage} color="white">
+              Login?
+            </G.Link>
+          </G.Text>
+        </G.Container>
+      )}
     </C.ContainerInformationsUser>
   );
 };

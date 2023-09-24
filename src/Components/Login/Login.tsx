@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../Context/Context";
 import user1 from "../../img/user1.png";
 import user2 from "../../img/user2.png";

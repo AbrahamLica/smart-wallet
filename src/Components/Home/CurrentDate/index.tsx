@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { Context } from "../../../Context/Context";
 import imgLeft from "../../../img/img-left.png";
 import imgRight from "../../../img/img-right.png";
+import { showCurrentDate } from "../../../Helpers/Helpers";
+import { changeManualDate } from "../../../Helpers/Helpers";
 
 const index = () => {
   const { state, dispatch } = useContext(Context);
@@ -13,59 +15,23 @@ const index = () => {
   const [currentYear, setCurrentYear] = useState(0);
 
   useEffect(() => {
-    showCurrentDate();
-    console.log(state.others.selectedManualMonth);
+    showCurrentDate(
+      setCurrentMonth,
+      setCurrentYear,
+      currentMonth,
+      currentYear,
+      dispatch
+    );
   }, [currentMonth, currentYear]);
 
-  function showCurrentDate() {
-    const date = new Date();
-    setCurrentMonth(date.getMonth() + 1);
-    setCurrentYear(date.getFullYear());
-
-    dispatch({
-      type: "CHANGE_MANUAL_DATE",
-      payload: {
-        selectedManualMonth: currentMonth,
-        selectedManualYear: currentYear,
-      },
-    });
-  }
-
-  function changeManualDate(e: any) {
-    let newMonth = state.others.selectedManualMonth;
-    let newYear = state.others.selectedManualYear;
-
-    if (e.target.alt === "left") {
-      newMonth--;
-      if (newMonth < 1) {
-        newMonth = 12;
-        newYear--;
-      }
-    } else {
-      newMonth++;
-      if (newMonth > 12) {
-        newMonth = 1;
-        newYear++;
-      }
-    }
-
-    dispatch({
-      type: "CHANGE_MANUAL_DATE",
-      payload: {
-        selectedManualMonth: newMonth,
-        selectedManualYear: newYear,
-      },
-    });
-  }
-
   return (
-    <G.Container width="100%">
+    <G.Container width="100%" displayFlex justifyContent="center">
       <C.ContainerCurrentDate>
         <G.Container>
           <C.ImgArrow
             src={imgLeft}
             alt="left"
-            onClick={changeManualDate}
+            onClick={(e) => changeManualDate(e, state, dispatch)}
           ></C.ImgArrow>
         </G.Container>
 
@@ -80,7 +46,7 @@ const index = () => {
           <C.ImgArrow
             src={imgRight}
             alt="right"
-            onClick={changeManualDate}
+            onClick={(e) => changeManualDate(e, state, dispatch)}
           ></C.ImgArrow>
         </G.Container>
       </C.ContainerCurrentDate>

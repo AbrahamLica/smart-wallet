@@ -1,11 +1,11 @@
 export type DataType = {
-  id?:any;
-  data?: any;
-  categoria?: string;
-  titulo?: string;
-  valor?: number;
-  despesa?: any;
-  receita?: any;
+  id?: number;
+  date?: any;
+  category?: string;
+  title?: string;
+  value?: number;
+  expense?: number;
+  income?: number;
 };
 
 export type UserType = {
@@ -52,4 +52,11 @@ export type UserImagesProps = {
   user4: string;
   user5: string;
   user6: string;
+};
+
+export type FinancialSummaryProps = {
+  colorText?: string;
+  width?: string;
+  border?: string;
+  margin?: string;
 };

@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         width: 100%;
-        background-color: #F5E2C8;
         font-family: 'Ubuntu';
         overflow-x: hidden;
     }

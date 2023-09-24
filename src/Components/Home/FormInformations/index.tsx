@@ -1,24 +1,29 @@
 import { ChangeEvent, useState } from "react";
 import * as C from "./styles";
+import * as G from "../../../Helpers/GeneralStyles";
 import { useEffect, useContext } from "react";
 import { Context } from "../../../Context/Context";
-import { Add } from "../../../Helpers/Helpers";
-import { changeValueCategoria } from "../../../Helpers/Helpers";
-import { changeValueData } from "../../../Helpers/Helpers";
-import { changeValueTitulo } from "../../../Helpers/Helpers";
-import { changeValueValor } from "../../../Helpers/Helpers";
+import { AddNewFinance } from "../../../Helpers/Helpers";
+import { changeValueCategory } from "../../../Helpers/Helpers";
+import { changeValueDate } from "../../../Helpers/Helpers";
+import { changeValueTitle } from "../../../Helpers/Helpers";
+import { changeValue } from "../../../Helpers/Helpers";
+import dateIcon from "../../../img/date.png";
+import titleIcon from "../../../img/title.png";
+import categoryIcon from "../../../img/category.png";
+import valueIcon from "../../../img/value.png";
 
 const FormInformations = () => {
   const { state, dispatch } = useContext(Context);
-  const [data, setData] = useState<any>(0);
-  const [categoria, setCategoria] = useState<any>("Despesa");
-  const [titulo, setTitulo] = useState("");
-  const [valor, setValor] = useState<number>(0);
+  const [date, setDate] = useState<any>(0);
+  const [category, setCategory] = useState<string>("Despesa");
+  const [title, setTitle] = useState("");
+  const [value, setValue] = useState<number>(0);
 
   useEffect(() => {
-    setValor(0);
-    setCategoria("Despesa");
-    setTitulo("");
+    setValue(0);
+    setCategory("Despesa");
+    setTitle("");
   }, [state.data, dispatch]);
 
   const list = [
@@ -27,29 +32,44 @@ const FormInformations = () => {
     { id: 3, name: "Salário" },
   ];
 
-console.log(state.data)
   function handleAdd() {
-    Add(data, categoria, titulo, valor, setData, setValor, setTitulo, dispatch);
+    AddNewFinance(
+      date,
+      category,
+      title,
+      value,
+      setDate,
+      setValue,
+      setTitle,
+      dispatch
+    );
   }
 
   return (
     <C.ContainerInformations>
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Data</C.TitleInformation>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Data</C.TitleInformation>
+          <img src={dateIcon} alt="dateIcon" width={30} />
+        </G.Container>
+
         <C.Input
           type="date"
-          onChange={(e) => changeValueData(e, setData)}
-          value={data}
+          onChange={(e) => changeValueDate(e, setDate)}
+          value={date}
           name="date"
           autoComplete="on"
         ></C.Input>
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Categoria</C.TitleInformation>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Categoria</C.TitleInformation>
+          <img src={categoryIcon} alt="categoryIcon" width={30} />
+        </G.Container>
         <C.Select
-          value={categoria}
-          onChange={(e) => changeValueCategoria(e, setCategoria)}
+          value={category}
+          onChange={(e) => changeValueCategory(e, setCategory)}
           name="category"
         >
           {list.map((item, index) => (
@@ -61,22 +81,28 @@ console.log(state.data)
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Título</C.TitleInformation>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Título</C.TitleInformation>
+          <img src={titleIcon} alt="titleIcon" width={30} />
+        </G.Container>
         <C.Input
           type="text"
-          onChange={(e) => changeValueTitulo(e, setTitulo)}
-          value={titulo}
+          onChange={(e) => changeValueTitle(e, setTitle)}
+          value={title}
           name="title"
           autoComplete="on"
         ></C.Input>
       </C.ContainerSingleInformation>
 
       <C.ContainerSingleInformation>
-        <C.TitleInformation>Valor</C.TitleInformation>
+        <G.Container displayFlex alignItems="center">
+          <C.TitleInformation>Valor</C.TitleInformation>
+          <img src={valueIcon} alt="valueIcon" width={30} />
+        </G.Container>
         <C.Input
           type="number"
-          onChange={(e) => changeValueValor(e, setValor)}
-          value={valor}
+          onChange={(e) => changeValue(e, setValue)}
+          value={value}
           name="value"
           autoComplete="on"
         ></C.Input>

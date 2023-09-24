@@ -1,16 +1,20 @@
-import { Context } from "../Context/Context";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+
+// ...
 
 // change input functions
 
-export function changeSetName(e: ChangeEvent<HTMLInputElement>, setName: any) {
+export function changeSetName(
+  e: ChangeEvent<HTMLInputElement>,
+  setName: Dispatch<SetStateAction<string>>
+) {
   setName(e.target.value);
 }
 
 export function changeSetAge(
   e: ChangeEvent<HTMLInputElement>,
-  setAge: any,
-  setAgeValid: any
+  setAge: Dispatch<SetStateAction<number>>,
+  setAgeValid: Dispatch<SetStateAction<boolean>>
 ) {
   setAge(e.target.valueAsNumber);
   setAgeValid(true);
@@ -18,43 +22,45 @@ export function changeSetAge(
 
 export function changeSetProfession(
   e: ChangeEvent<HTMLInputElement>,
-  setProfession: any
+  setProfession: Dispatch<SetStateAction<string>>
 ) {
   setProfession(e.target.value);
 }
 
-export function changeValueData(e: ChangeEvent<HTMLDataElement>, setData: any) {
-  // setData(Date.parse(e.target.value));
-  setData(e.target.value);
+export function changeValueDate(
+  e: ChangeEvent<HTMLDataElement>,
+  setDate: Dispatch<SetStateAction<any>>
+) {
+  setDate(e.target.value);
 }
 
-export function changeValueCategoria(
+export function changeValueCategory(
   e: ChangeEvent<HTMLSelectElement>,
-  setCategoria: any
+  setCategory: Dispatch<SetStateAction<any>>
 ) {
-  setCategoria(e.target.value);
+  setCategory(e.target.value);
 }
 
-export function changeValueTitulo(
+export function changeValueTitle(
   e: ChangeEvent<HTMLInputElement>,
-  setTitulo: any
+  setTitle: Dispatch<SetStateAction<string>>
 ) {
-  setTitulo(e.target.value);
+  setTitle(e.target.value);
 }
 
-export function changeValueValor(
+export function changeValue(
   e: ChangeEvent<HTMLInputElement>,
-  setValor: any
+  setValue: Dispatch<SetStateAction<number>>
 ) {
-  setValor(e.target.valueAsNumber);
+  setValue(e.target.valueAsNumber);
 }
 
 // validate inputs
 
 export function validateInputName(
   name: string,
-  setSpanName: any,
-  setNameValid: any
+  setSpanName: Dispatch<SetStateAction<string>>,
+  setNameValid: Dispatch<SetStateAction<boolean>>
 ) {
   if (!name) {
     setSpanName('o campo "Nome" não pode estar vazio!');
@@ -62,7 +68,7 @@ export function validateInputName(
   } else if (name.length >= 1 && name.length < 3) {
     setSpanName("O campo 'Nome' não pode ter menos de 3 caracteres!");
     setNameValid(false);
-  } else if (containsSpecialChars(name) == true) {
+  } else if (containsSpecialChars(name) === true) {
     setSpanName("O campo 'Nome' não pode ter caracteres especiais!");
     setNameValid(false);
   } else {
@@ -73,8 +79,8 @@ export function validateInputName(
 
 export function validateInputProfession(
   profession: string,
-  setSpanProfession: any,
-  setProfessionValid: any
+  setSpanProfession: Dispatch<SetStateAction<string>>,
+  setProfessionValid: Dispatch<SetStateAction<boolean>>
 ) {
   if (!profession) {
     setSpanProfession('o campo "Profissão" não pode estar vazio!');
@@ -84,10 +90,10 @@ export function validateInputProfession(
       "O campo 'Profissão' não pode ter menos de 3 caracteres!"
     );
     setProfessionValid(false);
-  } else if (containsSpecialChars(profession) == true) {
+  } else if (containsSpecialChars(profession) === true) {
     setSpanProfession("O campo 'Profissão' não pode ter caracteres especiais!");
     setProfessionValid(false);
-  } else if (containsNumbers(profession) == true) {
+  } else if (containsNumbers(profession) === true) {
     setSpanProfession("O campo 'Profissão' não pode ter números!");
     setProfessionValid(false);
   } else {
@@ -98,8 +104,8 @@ export function validateInputProfession(
 
 export function validateInputAge(
   age: number,
-  setAgeValid: any,
-  setSpanAge: any
+  setAgeValid: Dispatch<SetStateAction<boolean>>,
+  setSpanAge: Dispatch<SetStateAction<string>>
 ) {
   if (!age) {
     setSpanAge("O campo 'Idade' não pode estar vazio");
@@ -123,7 +129,7 @@ export function addAllErrorsToAlert(
   sexValid: boolean,
   avatarValid: boolean
 ) {
-  let arrayErrors = [];
+  let arrayErrors: string[] = [];
 
   if (!nameValid) {
     arrayErrors.push("Nome");
@@ -142,72 +148,127 @@ export function addAllErrorsToAlert(
     arrayErrors.push("Selecione o seu avatar");
   }
 
-  const str = arrayErrors.toString();
-
-  const newStr = str.replace(/,/g, " | ");
+  const str = arrayErrors.join(" | ");
 
   alert(`Por favor, verifique os seguintes itens:
-    ${newStr}
+    ${str}
   `);
 }
 
 // CRUD Functions
 
-export function Add(
-  data: any,
-  categoria: any,
-  titulo: any,
-  valor: number,
-  setData: any,
-  setValor: any,
-  setTitulo: any,
-  dispatch: any
+export function AddNewFinance(
+  date: any,
+  category: string,
+  title: string,
+  value: number,
+  setDate: Dispatch<SetStateAction<any>>,
+  setValue: Dispatch<SetStateAction<number>>,
+  setTitle: Dispatch<SetStateAction<string>>,
+  dispatch: Dispatch<any>
 ) {
   var id = Math.random();
 
-  if (data == 0 || categoria == "" || titulo == "" || valor == 0) {
+  if (date == 0 || category === "" || title === "" || value === 0) {
     alert("Por favor, preencha todos os dados antes de adicionar!");
   } else {
-    if (categoria == "Despesa") {
+    if (category === "Despesa") {
       dispatch({
         type: "CADASTRAR_DESPESA",
         payload: {
           id: id,
-          data: data,
-          categoria: categoria,
-          titulo: titulo,
-          valor: valor,
-          despesa: valor,
+          date: date,
+          category: category,
+          title: title,
+          value: value,
+          expense: value,
         },
       });
-    } else if (categoria == "Salário" || categoria == "Extra") {
+    } else if (category === "Salário" || category === "Extra") {
       dispatch({
         type: "CADASTRAR_RECEITA",
         payload: {
           id: id,
-          data: data,
-          categoria: categoria,
-          titulo: titulo,
-          valor: valor,
-          receita: valor,
+          date: date,
+          category: category,
+          title: title,
+          value: value,
+          income: value,
         },
       });
     }
-    setData(0);
-    setValor(0);
-    setTitulo("");
+    setDate(0);
+    setValue(0);
+    setTitle("");
   }
 }
 
-export function deleteItem(dispatch: any, id:any) {
+export function deleteItem(dispatch: Dispatch<any>, id: any) {
   if (window.confirm("Tem certeza que deseja excluir este item?")) {
     dispatch({
       type: "DELETE_ITEM",
       payload: {
-        id: id
+        id: id,
       },
     });
   }
+}
+
+//Date Functions
+
+export const formatDate = (date: any) => {
+  const dateObj = new Date(date);
+  const dia = String(dateObj.getDate() + 1).padStart(2, "0");
+  const mes = String(dateObj.getMonth() + 1).padStart(2, "0"); // Os meses são zero indexados
+  const ano = dateObj.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+};
+
+export function showCurrentDate(
+  setCurrentMonth: Dispatch<SetStateAction<any>>,
+  setCurrentYear: Dispatch<SetStateAction<any>>,
+  currentMonth: any,
+  currentYear: any,
+  dispatch: Dispatch<any>
+) {
+  const date = new Date();
+  setCurrentMonth(date.getMonth() + 1);
+  setCurrentYear(date.getFullYear());
+
+  dispatch({
+    type: "CHANGE_MANUAL_DATE",
+    payload: {
+      selectedManualMonth: currentMonth,
+      selectedManualYear: currentYear,
+    },
+  });
+}
+
+export function changeManualDate(e: any, state: any, dispatch: Dispatch<any>) {
+  let newMonth = state.others.selectedManualMonth;
+  let newYear = state.others.selectedManualYear;
+
+  if (e.target.alt === "left") {
+    newMonth--;
+    if (newMonth < 1) {
+      newMonth = 12;
+      newYear--;
+    }
+  } else {
+    newMonth++;
+    if (newMonth > 12) {
+      newMonth = 1;
+      newYear++;
+    }
+  }
+
+  dispatch({
+    type: "CHANGE_MANUAL_DATE",
+    payload: {
+      selectedManualMonth: newMonth,
+      selectedManualYear: newYear,
+    },
+  });
 }
 
 // Others
@@ -222,12 +283,16 @@ export function containsNumbers(str: string) {
   return specialChars.test(str);
 }
 
-export function setGender(e: any, setSex: any, setSexValid: any) {
+export function setGender(
+  e: ChangeEvent<HTMLInputElement>,
+  setSex: Dispatch<SetStateAction<string>>,
+  setSexValid: Dispatch<SetStateAction<boolean>>
+) {
   setSex(e.target.value);
   setSexValid(true);
 }
 
-export function handleToggleMenu(dispatch: any, state: any) {
+export function handleToggleMenu(dispatch: Dispatch<any>, state: any) {
   dispatch({
     type: "OPEN_MENU",
     payload: {
@@ -236,18 +301,18 @@ export function handleToggleMenu(dispatch: any, state: any) {
   });
 }
 
-export function calcularTudo(
-  setDespesa: any,
-  setReceita: any,
-  setBalanco: any,
+export function calculateEverything(
+  setExpense: Dispatch<SetStateAction<number>>,
+  setIncome: Dispatch<SetStateAction<number>>,
+  setBalance: Dispatch<SetStateAction<number>>,
   state: any
 ) {
-  var totalDespesaFormatado = 0;
-  var totalReceitaFormatado = 0;
-  var totalBalanco = 0;
+  var totalDespesaFormatado: number = 0;
+  var totalReceitaFormatado: number = 0;
+  var totalBalanco: number = 0;
 
   const filteredItems = state.data.filter((item: any) => {
-    const itemDate = new Date(item.data);
+    const itemDate = new Date(item.date);
     const itemMonth = itemDate.getMonth() + 1;
     const itemYear = itemDate.getFullYear();
     return (
@@ -258,33 +323,33 @@ export function calcularTudo(
 
   // Calcula despesa
   for (let i = 0; i < filteredItems.length; i++) {
-    if (filteredItems[i].despesa) {
-      totalDespesaFormatado += filteredItems[i].despesa;
+    if (filteredItems[i].expense) {
+      totalDespesaFormatado += filteredItems[i].expense;
     }
   }
-  setDespesa(totalDespesaFormatado.toFixed(2));
+  setExpense(totalDespesaFormatado);
 
   // Calcula Receita
   for (let i = 0; i < filteredItems.length; i++) {
-    if (filteredItems[i].receita) {
-      totalReceitaFormatado += filteredItems[i].receita;
+    if (filteredItems[i].income) {
+      totalReceitaFormatado += filteredItems[i].income;
     }
   }
-  setReceita(totalReceitaFormatado.toFixed(2));
+  setIncome(totalReceitaFormatado);
 
   // Calcula Balanço
   totalBalanco = totalReceitaFormatado - totalDespesaFormatado;
 
-  setBalanco(totalBalanco.toFixed(2));
+  setBalance(totalBalanco);
 }
 
 export function choseImgUser(
-  e: any,
-  setImgUserSelected: any,
+  e: ChangeEvent<HTMLInputElement>,
+  setImgUserSelected: Dispatch<SetStateAction<string>>,
   imageStates: any,
   img: any,
-  setImageStates: any,
-  setAvatarValid: any
+  setImageStates: Dispatch<SetStateAction<Record<string, boolean>>>,
+  setAvatarValid: Dispatch<SetStateAction<boolean>>
 ) {
   const updatedImageStates = { ...imageStates };
   for (const user in updatedImageStates) {
@@ -296,17 +361,9 @@ export function choseImgUser(
   setImageStates({ ...updatedImageStates, [img]: true });
 }
 
-export function formatarMoeda(valor: any) {
-  const valorFormatado = parseFloat(valor).toFixed(2);
-  return `R$ ${valorFormatado
+export function formatCurrency(value: any) {
+  const valueFormatado = parseFloat(value).toFixed(2);
+  return `R$ ${valueFormatado
     .replace(".", ",")
     .replace(/(\d)(?=(\d{3})+\,)/g, "$1.")}`;
 }
-
-export const formatarData = (data: any) => {
-  const dataObj = new Date(data);
-  const dia = String(dataObj.getDate() + 1).padStart(2, "0");
-  const mes = String(dataObj.getMonth() + 1).padStart(2, "0"); // Os meses são zero indexados
-  const ano = dataObj.getFullYear();
-  return `${dia}/${mes}/${ano}`;
-};

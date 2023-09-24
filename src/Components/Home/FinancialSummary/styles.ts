@@ -18,7 +18,6 @@ export const ContainerFinancialSummary = styled.div<ContainerProps>`
 export const ContainerSingleInformation = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
-
   @media (max-width: 570px) {
     margin-left: 10px;
     margin-right: 10px;
@@ -26,8 +25,9 @@ export const ContainerSingleInformation = styled.div<ContainerProps>`
 `;
 
 export const TitleInformation = styled.p<TextProps>`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
+  margin-right: 5px;
 `;
 
 export const Information = styled.p<TextProps>`

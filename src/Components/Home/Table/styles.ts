@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import { ContainerProps } from "../../../Types/typesStyles";
 
-
 export const ContainerTable = styled.div<ContainerProps>`
   width: 100%;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
-  /* display: flex; */
 
   @media (max-width: 600px) {
     overflow-x: auto;

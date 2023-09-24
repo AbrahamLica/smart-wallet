@@ -18,11 +18,11 @@ export function reducerData(state: DataType[], action: ActionType) {
       newState.push({
         ...state,
         id: action.payload?.id,
-        data: action.payload?.data,
-        categoria: action.payload?.categoria,
-        titulo: action.payload?.titulo,
-        valor: action.payload.valor,
-        despesa: action.payload.despesa,
+        date: action.payload?.date,
+        category: action.payload?.category,
+        title: action.payload?.title,
+        value: action.payload.value,
+        expense: action.payload.expense,
       });
       return newState;
       break;
@@ -31,11 +31,11 @@ export function reducerData(state: DataType[], action: ActionType) {
       let newStatee = [...state];
       newStatee.push({
         id: action.payload?.id,
-        data: action.payload?.data,
-        categoria: action.payload?.categoria,
-        titulo: action.payload?.titulo,
-        valor: action.payload.valor,
-        receita: action.payload.receita,
+        date: action.payload?.date,
+        category: action.payload?.category,
+        title: action.payload?.title,
+        value: action.payload.value,
+        income: action.payload.income,
       });
       return newStatee;
       break;
@@ -46,13 +46,6 @@ export function reducerData(state: DataType[], action: ActionType) {
         (item) => item.id !== action.payload?.id
       );
       return filteredArray;
-      break;
-
-    case "EDIT":
-      let newStateeee = [...state];
-      newStateeee[action.payload.pos].name = action.payload.name;
-      newStateeee[action.payload.pos].email = action.payload.email;
-      return newStateeee;
       break;
   }
 

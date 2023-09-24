@@ -36,6 +36,7 @@ export const TitleInformation = styled.p<TextProps>`
   font-size: 1.4rem;
   color: black;
   font-weight: bold;
+  margin-right: 5px;
 `;
 
 export const Input = styled.input<InputProps>`

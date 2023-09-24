@@ -44,5 +44,5 @@ export const Link = styled.a<TextProps>`
   font-size: ${(props) => props.fontSize};
   text-align: ${(props) => props.textAlign};
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
 `;
