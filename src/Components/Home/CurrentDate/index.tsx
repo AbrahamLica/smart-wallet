@@ -11,8 +11,8 @@ import { changeManualDate } from "../../../Helpers/Helpers";
 const index = () => {
   const { state, dispatch } = useContext(Context);
   const [currentDate, setCurrentDate] = useState<any>("");
-  const [currentMonth, setCurrentMonth] = useState(0);
-  const [currentYear, setCurrentYear] = useState(0);
+  const [currentMonth, setCurrentMonth] = useState<number>(0);
+  const [currentYear, setCurrentYear] = useState<number>(0);
 
   useEffect(() => {
     showCurrentDate(

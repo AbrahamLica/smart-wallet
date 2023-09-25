@@ -9,7 +9,11 @@ import {
 } from "../Types/types";
 import { createContext, useReducer } from "react";
 
-export const reducerDataInitialState: DataType[] = [];
+const initialDataState = localStorage.getItem("financeData");
+
+const reducerDataInitialState: DataType[] = initialDataState
+  ? JSON.parse(initialDataState)
+  : [];
 
 export function reducerData(state: DataType[], action: ActionType) {
   switch (action.type) {
@@ -24,6 +28,7 @@ export function reducerData(state: DataType[], action: ActionType) {
         value: action.payload.value,
         expense: action.payload.expense,
       });
+      localStorage.setItem("financeData", JSON.stringify(newState));
       return newState;
       break;
 
@@ -37,6 +42,7 @@ export function reducerData(state: DataType[], action: ActionType) {
         value: action.payload.value,
         income: action.payload.income,
       });
+      localStorage.setItem("financeData", JSON.stringify(newStatee));
       return newStatee;
       break;
 
@@ -45,6 +51,7 @@ export function reducerData(state: DataType[], action: ActionType) {
       let filteredArray = clonedArray.filter(
         (item) => item.id !== action.payload?.id
       );
+      localStorage.setItem("financeData", JSON.stringify(filteredArray));
       return filteredArray;
       break;
   }
@@ -54,18 +61,21 @@ export function reducerData(state: DataType[], action: ActionType) {
 
 //////////////////////////////////////////////////////////////////////
 
-export const reducerUserInitialState: UserType = {
-  name: "",
-  age: 0,
-  profession: "",
-  sex: "",
-  img: "",
-};
+const initialUserDataState = localStorage.getItem("userData");
+const reducerUserInitialState: UserType = initialUserDataState
+  ? JSON.parse(initialUserDataState)
+  : {
+      name: "",
+      age: 0,
+      profession: "",
+      sex: "",
+      img: "",
+    };
 
 export function reducerUser(state: UserType, action: ActionType) {
   switch (action.type) {
     case "LOG_IN":
-      return {
+      const newState = {
         ...state,
         name: action.payload?.name,
         age: action.payload?.age,
@@ -73,7 +83,8 @@ export function reducerUser(state: UserType, action: ActionType) {
         sex: action.payload?.sex,
         img: action.payload?.img,
       };
-      break;
+      localStorage.setItem("userData", JSON.stringify(newState));
+      return newState;
   }
 
   return state;

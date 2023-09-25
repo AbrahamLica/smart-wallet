@@ -42,7 +42,7 @@ const index = () => {
                 <C.Td>{formatCurrency(item.value)}</C.Td>
                 <C.ImgDelete
                   src={trash}
-                  onClick={() => deleteItem(dispatch, item.id)}
+                  onClick={() => item.id && deleteItem(dispatch, item.id)}
                 ></C.ImgDelete>
               </tr>
             </tbody>

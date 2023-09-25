@@ -158,11 +158,11 @@ export function addAllErrorsToAlert(
 // CRUD Functions
 
 export function AddNewFinance(
-  date: any,
+  date: number,
   category: string,
   title: string,
   value: number,
-  setDate: Dispatch<SetStateAction<any>>,
+  setDate: Dispatch<SetStateAction<number>>,
   setValue: Dispatch<SetStateAction<number>>,
   setTitle: Dispatch<SetStateAction<string>>,
   dispatch: Dispatch<any>
@@ -200,10 +200,19 @@ export function AddNewFinance(
     setDate(0);
     setValue(0);
     setTitle("");
+
+    const currentState = JSON.parse(
+      localStorage.getItem("financeData") || "[]"
+    );
+    const updatedState = [
+      ...currentState,
+      { id, date, category, title, value },
+    ];
+    localStorage.setItem("financeData", JSON.stringify(updatedState));
   }
 }
 
-export function deleteItem(dispatch: Dispatch<any>, id: any) {
+export function deleteItem(dispatch: Dispatch<any>, id: number) {
   if (window.confirm("Tem certeza que deseja excluir este item?")) {
     dispatch({
       type: "DELETE_ITEM",
@@ -216,7 +225,7 @@ export function deleteItem(dispatch: Dispatch<any>, id: any) {
 
 //Date Functions
 
-export const formatDate = (date: any) => {
+export const formatDate = (date: number) => {
   const dateObj = new Date(date);
   const dia = String(dateObj.getDate() + 1).padStart(2, "0");
   const mes = String(dateObj.getMonth() + 1).padStart(2, "0"); // Os meses são zero indexados
@@ -225,10 +234,10 @@ export const formatDate = (date: any) => {
 };
 
 export function showCurrentDate(
-  setCurrentMonth: Dispatch<SetStateAction<any>>,
-  setCurrentYear: Dispatch<SetStateAction<any>>,
-  currentMonth: any,
-  currentYear: any,
+  setCurrentMonth: Dispatch<SetStateAction<number>>,
+  setCurrentYear: Dispatch<SetStateAction<number>>,
+  currentMonth: number,
+  currentYear: number,
   dispatch: Dispatch<any>
 ) {
   const date = new Date();
